@@ -19,10 +19,14 @@ namespace Farsiman.Entities.Entities
         [NotMapped]
         public string? sade_Total { get; set; }
         [NotMapped]
+        public string? sade_TotalItems { get; set; }
+        [NotMapped]
+        public string? usua_Modifica { get; set; }  
+        [NotMapped]
         public string? Respuesta { get; set; }
         public DateTime usua_FechaCreacion { get; set; }
         public int? usua_UsuarioModificacion { get; set; }
-        public DateTime? usua_FechaModificacion { get; set; }
+        public string? usua_FechaModificacion { get; set; }
         public int? sali_Estado { get; set; }
         [NotMapped]
         public string? Detalles { get; set; }

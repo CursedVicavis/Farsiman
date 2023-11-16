@@ -11,6 +11,8 @@ namespace Farsiman.API.Modelos
         public string? sucu_Nombre { get; set; }
         public string? prod_Descripcion { get; set; }
         public DateTime? sali_Fecha { get; set; }
+        public string? sade_TotalItems { get; set; }
+        public string? usua_Modifica { get; set; }
         public string? sade_Total { get; set; }
         public string? Detalles { get; set; }
         public string? Respuesta { get; set; }

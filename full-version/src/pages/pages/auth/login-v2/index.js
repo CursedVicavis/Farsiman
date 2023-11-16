@@ -199,9 +199,7 @@ const LoginV2 = () => {
               <Typography sx={{ mb: 1.5, fontWeight: 500, fontSize: '1.625rem', lineHeight: 1.385 }}>
                 {`Bienvenido(a) al Sistema de inventario ! 👋🏻`}
               </Typography>
-              <Typography sx={{ color: 'text.secondary' }}>
-                Inicia sesion para comenzar tu aventura con nosotros
-              </Typography>
+              <Typography sx={{ color: 'text.secondary' }}>Inicia sesion</Typography>
             </Box>
             <form
               onSubmit={e => {

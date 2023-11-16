@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "v0VZvedAwJl5I/Qe1Cb8V9WHnD1DmGWOk+AzAJubyd6EVwqf1uk8B5gw8KOWdtl+lqse7pyEmmMKHk6j2N5rRg==",
+  "dgSpecHash": "WrD3A+TgbeS7ASGZvcI8DDYiWgf2+gdSqdxDRiCR4H9UI9FjWfuHhHyX0qi29nhrSSHPgRTS6c/gfzYcEXjPPA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Javinto7\\source\\repos\\ApiFarsiman\\Farsiman.API\\Farsiman.API.csproj",
+  "projectFilePath": "C:\\Users\\Javinto7\\Documents\\GitHub\\Farsiman\\ApiFarsiman\\Farsiman.API\\Farsiman.API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Javinto7\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\Javinto7\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",

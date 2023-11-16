@@ -9,3 +9,14 @@ C:\Users\Javinto7\source\repos\ApiFarsiman\Farsiman.Entities\obj\Debug\net6.0\Fa
 C:\Users\Javinto7\source\repos\ApiFarsiman\Farsiman.Entities\obj\Debug\net6.0\refint\Farsiman.Entities.dll
 C:\Users\Javinto7\source\repos\ApiFarsiman\Farsiman.Entities\obj\Debug\net6.0\Farsiman.Entities.pdb
 C:\Users\Javinto7\source\repos\ApiFarsiman\Farsiman.Entities\obj\Debug\net6.0\ref\Farsiman.Entities.dll
+C:\Users\Javinto7\Documents\GitHub\Farsiman\ApiFarsiman\Farsiman.Entities\bin\Debug\net6.0\Farsiman.Entities.deps.json
+C:\Users\Javinto7\Documents\GitHub\Farsiman\ApiFarsiman\Farsiman.Entities\bin\Debug\net6.0\Farsiman.Entities.dll
+C:\Users\Javinto7\Documents\GitHub\Farsiman\ApiFarsiman\Farsiman.Entities\bin\Debug\net6.0\Farsiman.Entities.pdb
+C:\Users\Javinto7\Documents\GitHub\Farsiman\ApiFarsiman\Farsiman.Entities\obj\Debug\net6.0\Farsiman.Entities.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Javinto7\Documents\GitHub\Farsiman\ApiFarsiman\Farsiman.Entities\obj\Debug\net6.0\Farsiman.Entities.AssemblyInfoInputs.cache
+C:\Users\Javinto7\Documents\GitHub\Farsiman\ApiFarsiman\Farsiman.Entities\obj\Debug\net6.0\Farsiman.Entities.AssemblyInfo.cs
+C:\Users\Javinto7\Documents\GitHub\Farsiman\ApiFarsiman\Farsiman.Entities\obj\Debug\net6.0\Farsiman.Entities.csproj.CoreCompileInputs.cache
+C:\Users\Javinto7\Documents\GitHub\Farsiman\ApiFarsiman\Farsiman.Entities\obj\Debug\net6.0\Farsiman.Entities.dll
+C:\Users\Javinto7\Documents\GitHub\Farsiman\ApiFarsiman\Farsiman.Entities\obj\Debug\net6.0\refint\Farsiman.Entities.dll
+C:\Users\Javinto7\Documents\GitHub\Farsiman\ApiFarsiman\Farsiman.Entities\obj\Debug\net6.0\Farsiman.Entities.pdb
+C:\Users\Javinto7\Documents\GitHub\Farsiman\ApiFarsiman\Farsiman.Entities\obj\Debug\net6.0\ref\Farsiman.Entities.dll

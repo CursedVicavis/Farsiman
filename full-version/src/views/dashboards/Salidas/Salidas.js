@@ -3,10 +3,12 @@ import toast from 'react-hot-toast'
 import DatePicker from 'react-datepicker'
 import Paper from '@mui/material/Paper'
 import Card from '@mui/material/Card'
+import ReactTooltip from 'react-tooltip'
 import CardContent from '@mui/material/CardContent'
 import { useRouter } from 'next/router'
 import Select from '@mui/material/Select'
 import Chip from '@mui/material/Chip'
+import Popover from '@mui/material/Popover'
 import Button from '@mui/material/Button'
 import FormControl from '@mui/material/FormControl'
 import Dialog from '@mui/material/Dialog'
@@ -22,6 +24,8 @@ import DialogContentText from '@mui/material/DialogContentText'
 import CustomInput from 'src/views/dashboards/Registro/PickersCustomInput'
 import 'react-datepicker/dist/react-datepicker.css'
 import { yupResolver } from '@hookform/resolvers/yup'
+
+import CustomDatePicker from './datepicker'
 
 // ** MUI Imports
 import MenuItem from '@mui/material/MenuItem'
@@ -95,6 +99,18 @@ export default function Content() {
       })
     }
 
+    const [anchorEl, setAnchorEl] = React.useState(null)
+
+    const handlePopoverOpen = event => {
+      setAnchorEl(event.currentTarget)
+    }
+
+    const handlePopoverClose = () => {
+      setAnchorEl(null)
+    }
+
+    const openpop = Boolean(anchorEl)
+
     return (
       <React.Fragment>
         <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
@@ -108,11 +124,43 @@ export default function Content() {
           <TableCell>{row.sali_Fecha}</TableCell>
           <TableCell>{row.usua_Nombre}</TableCell>
           <TableCell>{row.sade_Total}</TableCell>
+          <TableCell>{row.sade_TotalItems}</TableCell>
           <TableCell>
             {row.sali_Estado === 1 ? (
-              <Chip label='Enviado a Sucursal' variant='outlined' color='warning' />
+              <Chip label='Enviado a Sucursal' variant='outlined' color='warning'></Chip>
             ) : row.sali_Estado === 2 ? (
-              <Chip label='Recibido en Sucursal' variant='outlined' color='success' />
+              <>
+                <Chip
+                  onMouseEnter={handlePopoverOpen}
+                  onMouseLeave={handlePopoverClose}
+                  label='Recibido en Sucursal'
+                  variant='outlined'
+                  color='success'
+                />
+
+                <Popover
+                  id='mouse-over-popover'
+                  sx={{
+                    pointerEvents: 'none'
+                  }}
+                  open={openpop}
+                  anchorEl={anchorEl}
+                  anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'left'
+                  }}
+                  transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'left'
+                  }}
+                  onClose={handlePopoverClose}
+                  disableRestoreFocus
+                >
+                  <Typography sx={{ p: 1 }}>
+                    Recibido por: {row.usua_Modifica} El dia de: {row.usua_FechaModificacion}
+                  </Typography>
+                </Popover>
+              </>
             ) : (
               <p>El número no es ni 1 ni 2</p>
             )}
@@ -204,8 +252,6 @@ export default function Content() {
 
   const [editDialogOpen, setEditDialogOpen] = useState(false)
   const [validationErrors, setvalidationErrors] = useState({})
-  const [dateinicio, setDateinicio] = useState(new Date())
-  const [datefinal, setDatefinal] = useState(new Date())
   const [sucursalddl, setSucursalddl] = useState([])
 
   //Funcion para mostrar los datos con fetch
@@ -261,7 +307,7 @@ export default function Content() {
   //el filtrado tiene que ser AÑO MES DIA
 
   const filtrado = async diti => {
-    const fechaObj = new Date(diti.FechaInicio)
+    const fechaObj = new Date(dateinicio)
 
     // Extrae los componentes de la fecha (año, mes y día)
     const año = fechaObj.getFullYear()
@@ -271,7 +317,7 @@ export default function Content() {
     // Formatea la fecha en el formato 'yyyy/mm/dd'
     const fechaFormateada = `${año}/${mes < 10 ? '0' : ''}${mes}/${día < 10 ? '0' : ''}${día}`
 
-    const fechaOb = new Date(diti.FechaFinal)
+    const fechaOb = new Date(datefinal)
 
     // Extrae los componentes de la fecha (año, mes y día)
     const año2 = fechaOb.getFullYear()
@@ -295,71 +341,38 @@ export default function Content() {
     console.log(data)
   }
 
+  const [dateinicio, setDateinicio] = useState(null)
+  const [datefinal, setDatefinal] = useState(null)
+
+  const handleDateChange = date => {
+    setDateinicio(date)
+  }
+
+  const handleDateChangeFinal = date => {
+    setDatefinal(date)
+  }
+
   return (
     <div>
-      <Button href='/dashboards/Salidas/Create'>Crear</Button>
       <TabContext value={value}>
         <TabList centered onChange={handleChange} aria-label='centered tabs example' style={{ display: 'none' }}>
           <Tab value='1' label='Tab 1' />
           <Tab value='2' label='Tab 2' />
         </TabList>
         <TabPanel value='1'>
+          <Button variant='contained' href='/dashboards/Salidas/Create'>
+            Crear
+          </Button>
           <h1>Salidas</h1>
           <form key={0} onSubmit={handleAccountSubmit(onSubmit)}>
             <Card>
               <CardContent>
                 <Grid container spacing={12}>
                   <Grid item xs={2} sm={2}>
-                    <Controller
-                      name='FechaInicio'
-                      control={accountControl}
-                      rules={{ required: true }}
-                      render={({ field: { value, onChange } }) => (
-                        <DatePicker
-                          placeholderText='Selecciona una fecha inicio'
-                          selected={dateinicio}
-                          id='basic-input'
-                          popperPlacement={popperPlacement}
-                          dateFormat='yyyy/MM/dd/'
-                          onChange={e => onChange(e)}
-                          customInput={
-                            <CustomInput
-                              value={value}
-                              onChange={onChange}
-                              label='Fecha Inicio'
-                              error={Boolean(accountErrors.FechaInicio)}
-                              aria-describedby='validation-basic-FechaInicio'
-                            />
-                          }
-                        />
-                      )}
-                    />
+                    <CustomDatePicker selectedDate={dateinicio} handleDateChange={handleDateChange} />
                   </Grid>
                   <Grid item xs={2} sm={2}>
-                    <Controller
-                      name='FechaFinal'
-                      control={accountControl}
-                      rules={{ required: true }}
-                      render={({ field: { value, onChange } }) => (
-                        <DatePicker
-                          placeholderText='Selecciona una fecha final'
-                          selected={datefinal}
-                          id='basic-input'
-                          popperPlacement={popperPlacement}
-                          dateFormat='yyyy/MM/dd/'
-                          onChange={e => onChange(e)}
-                          customInput={
-                            <CustomInput
-                              value={value}
-                              onChange={onChange}
-                              label='Fech Final'
-                              error={Boolean(accountErrors.FechaFinal)}
-                              aria-describedby='validation-basic-FechaFinal'
-                            />
-                          }
-                        />
-                      )}
-                    />
+                    <CustomDatePicker selectedDate={datefinal} handleDateChange={handleDateChangeFinal} />
                   </Grid>
                   <Grid item xs={2} sm={2}>
                     <FormControl fullWidth>
@@ -404,7 +417,14 @@ export default function Content() {
                     </Button>
                   </Grid>
                   <Grid item xs={3} sm={3}>
-                    <Button size='large' type='button' variant='contained' onClick={showData()}>
+                    <Button
+                      size='large'
+                      type='button'
+                      variant='contained'
+                      onClick={e => {
+                        showData()
+                      }}
+                    >
                       Eliminar Filtro
                     </Button>
                   </Grid>
@@ -412,7 +432,6 @@ export default function Content() {
               </CardContent>
             </Card>
           </form>
-
           <br></br>
           <TableContainer component={Paper}>
             <Table aria-label='collapsible table'>
@@ -424,6 +443,7 @@ export default function Content() {
                   <TableCell>Fecha de salida</TableCell>
                   <TableCell>Usuario que realizo la salida</TableCell>
                   <TableCell>Total a pagar de la salida</TableCell>
+                  <TableCell>Total Items</TableCell>
                   <TableCell>Estado de la salida</TableCell>
                   <TableCell>Acciones</TableCell>
                 </TableRow>

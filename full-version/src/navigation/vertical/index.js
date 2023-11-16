@@ -56,7 +56,7 @@ const navigation = () => {
 
   return [
     {
-      title: 'Generales',
+      title: 'Salidas',
       icon: 'tabler:smart-home',
       children: Generales
     },
@@ -64,11 +64,6 @@ const navigation = () => {
       title: 'Seguridad',
       icon: 'iconamoon:lock',
       children: Seguridad
-    },
-    {
-      title: 'Grafica',
-      icon: 'tabler:align-box-bottom-center',
-      path: '/dashboards/Grafica'
     }
   ]
 }

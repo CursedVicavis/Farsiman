@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "3XgHpgmw+2rVFXhNBJXaSo+paj9Vn72MDwTGPSb+Gyw5ImahPbtX/Nvp0OoOZryILYQ1bhcAvZghHHPkgNa8XA==",
+  "dgSpecHash": "8QF1R5h4CTeXXIpXG2EAVjTp2+usW8mUXY0oDQYJaVAtMTQ9ahzzy/bgOnnYMJ6DiDb9UIWzAek540ga1wVGRw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Javinto7\\source\\repos\\ApiFarsiman\\Farsiman.BusinessLogic\\Farsiman.BusinessLogic.csproj",
+  "projectFilePath": "C:\\Users\\Javinto7\\Documents\\GitHub\\Farsiman\\ApiFarsiman\\Farsiman.BusinessLogic\\Farsiman.BusinessLogic.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Javinto7\\.nuget\\packages\\azure.core\\1.25.0\\azure.core.1.25.0.nupkg.sha512",
     "C:\\Users\\Javinto7\\.nuget\\packages\\azure.identity\\1.7.0\\azure.identity.1.7.0.nupkg.sha512",

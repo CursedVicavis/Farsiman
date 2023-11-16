@@ -88,48 +88,25 @@ INNER JOIN Bode.tbLotes lote ON lote.prod_Id = prod.prod_Id
 WHERE sali_Id = sali.sali_Id 
 
    FOR JSON PATH ) AS Detalles,
-   
+      (SELECT SUM(sape.sade_Cantidad ) AS sade_TotalItems
+FROM bode.tbSalidasDetalles sape
+INNER JOIN Bode.tbProductos pro ON sape.prod_Id = pro.prod_Id WHERE sape.sali_Id =sali.sali_Id  ) AS sade_TotalItems,
    (SELECT SUM(sape.sade_Cantidad * pro.prod_Precio) AS sade_Total
 FROM bode.tbSalidasDetalles sape
 INNER JOIN Bode.tbProductos pro ON sape.prod_Id = pro.prod_Id WHERE sape.sali_Id =sali.sali_Id
-GROUP BY sali_Id ) AS sade_Total
-
+GROUP BY sali_Id ) AS sade_Total,
+modi.usua_Nombre AS usua_Modifica,
+sali.usua_FechaModificacion
 FROM Bode.tbSalidas sali 
 INNER JOIN Acce.tbUsuarios crea ON crea.usua_Id = sali.usua_UsuarioCreacion
-INNER JOIN Bode.tbSucursale sucu ON sali.sucu_Id = sucu.sucu_Id
+INNER JOIN Bode.tbSucursale sucu ON sali.sucu_Id = sucu.sucu_Id 
+LEFT JOIN Acce.tbUsuarios  modi ON modi.usua_Id = sali.usua_UsuarioModificacion
 GO
 
 CREATE OR ALTER PROCEDURE Bode.UDP_tbSalidas_Listar
 AS
 BEGIN
-SELECT sali_Id, 
-sucu.sucu_Nombre, 
-sali_Fecha,
-crea.usua_Nombre,	
-sali_Estado,
-( SELECT sade_Id, 
-sali_Id, 
-prod.prod_Id, 
-prod.prod_Descripcion,
-(SELECT sum(lote_Precio) / sum(lote_Cantidad) from Bode.tbLotes lot WHERE lot.prod_Id = prod.prod_Id ) AS prod_PrecioReal ,
-lote_Id,
-lote_FechaVencimiento,
-sade_Cantidad
-FROM Bode.tbSalidasDetalles sade 
-INNER JOIN Bode.tbProductos prod ON sade.prod_Id = prod.prod_Id
-INNER JOIN Bode.tbLotes lote ON lote.prod_Id = prod.prod_Id
-WHERE sali_Id = sali.sali_Id 
-
-   FOR JSON PATH ) AS Detalles,
-   
-   (SELECT SUM(sape.sade_Cantidad * pro.prod_Precio) AS sade_Total
-FROM bode.tbSalidasDetalles sape
-INNER JOIN Bode.tbProductos pro ON sape.prod_Id = pro.prod_Id WHERE sape.sali_Id =sali.sali_Id
-GROUP BY sali_Id ) AS sade_Total
-
-FROM Bode.tbSalidas sali 
-INNER JOIN Acce.tbUsuarios crea ON crea.usua_Id = sali.usua_UsuarioCreacion
-INNER JOIN Bode.tbSucursale sucu ON sali.sucu_Id = sucu.sucu_Id
+SELECT * FROM Bode.VW_tbSalidas_Listar 
 END
 GO
 

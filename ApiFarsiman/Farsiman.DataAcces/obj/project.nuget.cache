@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "UAPH7snFGkStoRUMj+0jWlmsztusaYnspUpuEQp/hK3zVWTpoU0M3aUHvcaupBxODNnXyBImW0VXibo7YHKrFw==",
+  "dgSpecHash": "Ks0FJJvR9sTggPfWe3YEjgV8w5UrspMfp9IIrVeQT1AyXUVGjxGV4JZQbrYtkIRjA4HwP9laXZunzC9NDRchmQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Javinto7\\source\\repos\\ApiFarsiman\\Farsiman.DataAcces\\Farsiman.DataAcces.csproj",
+  "projectFilePath": "C:\\Users\\Javinto7\\Documents\\GitHub\\Farsiman\\ApiFarsiman\\Farsiman.DataAcces\\Farsiman.DataAcces.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Javinto7\\.nuget\\packages\\azure.core\\1.25.0\\azure.core.1.25.0.nupkg.sha512",
     "C:\\Users\\Javinto7\\.nuget\\packages\\azure.identity\\1.7.0\\azure.identity.1.7.0.nupkg.sha512",
