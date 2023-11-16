@@ -1,0 +1,34 @@
+{
+  "version": 2,
+  "dgSpecHash": "XgDE2MWPqi2tGdKbHRzbN9CHUWDaEEh5k2KXQI4b81UHjkHf0JQZDAhK6ka8XfhhC/L3V55Qp8+foTXaSxuxww==",
+  "success": false,
+  "projectFilePath": "C:\\Users\\Javinto7\\source\\repos\\ApiFarsiman\\Bodegas.API\\Bodegas.API.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Javinto7\\.nuget\\packages\\microsoft.extensions.apidescription.server\\3.0.0\\microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
+    "C:\\Users\\Javinto7\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
+    "C:\\Users\\Javinto7\\.nuget\\packages\\swashbuckle.aspnetcore\\5.6.3\\swashbuckle.aspnetcore.5.6.3.nupkg.sha512",
+    "C:\\Users\\Javinto7\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\5.6.3\\swashbuckle.aspnetcore.swagger.5.6.3.nupkg.sha512",
+    "C:\\Users\\Javinto7\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\5.6.3\\swashbuckle.aspnetcore.swaggergen.5.6.3.nupkg.sha512",
+    "C:\\Users\\Javinto7\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\5.6.3\\swashbuckle.aspnetcore.swaggerui.5.6.3.nupkg.sha512"
+  ],
+  "logs": [
+    {
+      "code": "NU1201",
+      "level": "Error",
+      "message": "El proyecto Farsiman.Entities no es compatible con net5.0 (.NETCoreApp,Version=v5.0). El proyecto Farsiman.Entities admite: net6.0 (.NETCoreApp,Version=v6.0)",
+      "libraryId": "Farsiman.Entities",
+      "targetGraphs": [
+        "net5.0"
+      ]
+    },
+    {
+      "code": "NU1201",
+      "level": "Error",
+      "message": "El proyecto Farsiman.BusinessLogic no es compatible con net5.0 (.NETCoreApp,Version=v5.0). El proyecto Farsiman.BusinessLogic admite: net6.0 (.NETCoreApp,Version=v6.0)",
+      "libraryId": "Farsiman.BusinessLogic",
+      "targetGraphs": [
+        "net5.0"
+      ]
+    }
+  ]
+}
