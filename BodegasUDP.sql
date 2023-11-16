@@ -106,7 +106,7 @@ GO
 CREATE OR ALTER PROCEDURE Bode.UDP_tbSalidas_Listar
 AS
 BEGIN
-SELECT * FROM Bode.VW_tbSalidas_Listar 
+SELECT * FROM Bode.VW_tbSalidas_Listar	
 END
 GO
 
