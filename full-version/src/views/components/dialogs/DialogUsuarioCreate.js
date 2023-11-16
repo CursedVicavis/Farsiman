@@ -147,9 +147,6 @@ const DialogForm = ({ updateData }) => {
 
   return (
     <Fragment>
-      <Button variant='contained' onClick={handleClickOpen} endIcon={<Icon icon='tabler:plus' />}>
-        Nuevo
-      </Button>
       <form
         onSubmit={e => {
           UsuariosInsertAction(e)
