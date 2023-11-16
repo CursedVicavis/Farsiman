@@ -149,8 +149,8 @@ CREATE TABLE Bode.tbSalidas (
 		sali_Estado					INT,--(1 = Enviado a Sucursal 2 = Recibo en Sucursal)
 	CONSTRAINT PK_Bode_tbSalidas_sali_Id PRIMARY KEY (sali_Id),
 	CONSTRAINT FK_Bode_tbSucursale_sucu_Id_tbSucursale_sucu_Id FOREIGN KEY (sucu_Id) REFERENCES Bode.tbSucursale (sucu_Id),
-	CONSTRAINT FK_Bode_tbSalidasDetalles_usua_UsuarioCreacion_Acce_tbUsuarios_usua_Id		FOREIGN KEY (usua_UsuarioCreacion)		REFERENCES Acce.tbUsuarios (usua_Id),
-	CONSTRAINT FK_Bode_tbSalidasDetalles_usua_UsuarioModificacion_Acce_tbUsuarios_usua_Id FOREIGN KEY (usua_UsuarioModificacion)	REFERENCES Acce.tbUsuarios (usua_Id),
+	CONSTRAINT FK_Bode_tbSalidas_usua_UsuarioCreacion_Acce_tbUsuarios_usua_Id		FOREIGN KEY (usua_UsuarioCreacion)		REFERENCES Acce.tbUsuarios (usua_Id),
+	CONSTRAINT FK_Bode_tbSalidas_usua_UsuarioModificacion_Acce_tbUsuarios_usua_Id FOREIGN KEY (usua_UsuarioModificacion)	REFERENCES Acce.tbUsuarios (usua_Id),
 
 )
 
