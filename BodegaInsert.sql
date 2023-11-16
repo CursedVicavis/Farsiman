@@ -4,11 +4,12 @@ INSERT INTO Acce.tbRoles(role_Descripcion,usua_UsuarioCreacion,usua_FechaCreacio
 VALUES	('Jefe de Bodega',1,GETDATE()),
 		('Visualizador',1,GETDATE())
 
+
 DECLARE @contraseña NVARCHAR(MAX) = '123'
 DECLARE @contrasenaEncriptada NVARCHAR(MAX)=(SELECT HASHBYTES('SHA2_512', @contraseña));
 INSERT INTO Acce.tbUsuarios(usua_Nombre, usua_Contrasenia, empl_Id, role_Id, usua_EsAdmin,  usua_UsuarioCreacion, usua_FechaCreacion)
-VALUES	('Carlos123',@contrasenaEncriptada,2,2,0,1,GETDATE())
-
+VALUES	('Carlos123',@contrasenaEncriptada,2,1,0,1,GETDATE()),
+('redcat',@contrasenaEncriptada,2,2,0,1,GETDATE())
 
 INSERT INTO Gral.tbEmpleados(empl_Nombre, empl_Sexo, empl_DNI)
 VALUES	('Javier Lopez','M', '0501200506681'),

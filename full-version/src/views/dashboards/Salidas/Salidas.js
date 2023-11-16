@@ -352,6 +352,8 @@ export default function Content() {
     setDatefinal(date)
   }
 
+  const rol = localStorage.getItem('Rol')
+
   return (
     <div>
       <TabContext value={value}>
@@ -360,9 +362,13 @@ export default function Content() {
           <Tab value='2' label='Tab 2' />
         </TabList>
         <TabPanel value='1'>
-          <Button variant='contained' href='/dashboards/Salidas/Create'>
-            Crear
-          </Button>
+          {parseInt(rol) == 1 ? (
+            <Button variant='contained' href='/dashboards/Salidas/Create'>
+              Crear
+            </Button>
+          ) : (
+            <></>
+          )}
           <h1>Salidas</h1>
           <form key={0} onSubmit={handleAccountSubmit(onSubmit)}>
             <Card>

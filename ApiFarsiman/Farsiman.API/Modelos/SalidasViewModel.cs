@@ -10,7 +10,7 @@ namespace Farsiman.API.Modelos
         [NotMapped]
         public string? sucu_Nombre { get; set; }
         public string? prod_Descripcion { get; set; }
-        public DateTime? sali_Fecha { get; set; }
+        public string? sali_Fecha { get; set; }
         public string? sade_TotalItems { get; set; }
         public string? usua_Modifica { get; set; }
         public string? sade_Total { get; set; }
@@ -20,8 +20,8 @@ namespace Farsiman.API.Modelos
 
         public int? sali_Estado { get; set; }
         public int usua_UsuarioCreacion { get; set; }
-        public DateTime usua_FechaCreacion { get; set; }
+        public string usua_FechaCreacion { get; set; }
         public int? usua_UsuarioModificacion { get; set; }
-        public DateTime? usua_FechaModificacion { get; set; }
+        public string? usua_FechaModificacion { get; set; }
     }
 }
