@@ -14,14 +14,15 @@
           "Farsiman.AuthServer.Extensions": "1.0.35371",
           "Farsiman.Domain.Core.Validations.Standard": "1.0.0",
           "Farsiman.Extensions.Configuration": "2.29723.0",
-          "Farsiman.Infraestructure.Core.Entity.Standard": "6.2.2.6",
           "FluentValidation": "11.9.0",
           "Microsoft.AspNetCore.Mvc.NewtonsoftJson": "6.0.25",
           "Microsoft.EntityFrameworkCore": "6.0.25",
           "Microsoft.EntityFrameworkCore.InMemory": "6.0.25",
           "Microsoft.EntityFrameworkCore.SqlServer": "6.0.25",
           "Microsoft.EntityFrameworkCore.Tools": "6.0.25",
-          "Swashbuckle.AspNetCore": "6.5.0"
+          "Swashbuckle.AspNetCore": "6.5.0",
+          "Farsiman.Domain.Core.Standard": "1.0.0.0",
+          "Farsiman.Infraestructure.Core.Entity.Standard": "1.0.0.0"
         },
         "runtime": {
           "FarsimanJLS2.Proyecto.Api.dll": {}
@@ -87,33 +88,12 @@
           }
         }
       },
-      "Farsiman.Dominio.Core.Standard/1.1.5": {
-        "runtime": {
-          "lib/netstandard2.0/Farsiman.Domain.Core.Standard.dll": {
-            "assemblyVersion": "1.0.0.0",
-            "fileVersion": "1.0.0.0"
-          }
-        }
-      },
       "Farsiman.Extensions.Configuration/2.29723.0": {
         "dependencies": {
           "Microsoft.Extensions.Configuration": "6.0.1"
         },
         "runtime": {
           "lib/netstandard2.0/Farsiman.Extensions.Configuration.dll": {
-            "assemblyVersion": "1.0.0.0",
-            "fileVersion": "1.0.0.0"
-          }
-        }
-      },
-      "Farsiman.Infraestructure.Core.Entity.Standard/6.2.2.6": {
-        "dependencies": {
-          "Farsiman.Dominio.Core.Standard": "1.1.5",
-          "Microsoft.EntityFrameworkCore": "6.0.25",
-          "Microsoft.EntityFrameworkCore.Relational": "6.0.25"
-        },
-        "runtime": {
-          "lib/netstandard2.0/Farsiman.Infraestructure.Core.Entity.Standard.dll": {
             "assemblyVersion": "1.0.0.0",
             "fileVersion": "1.0.0.0"
           }
@@ -868,6 +848,22 @@
             "fileVersion": "4.700.19.56404"
           }
         }
+      },
+      "Farsiman.Domain.Core.Standard/1.0.0.0": {
+        "runtime": {
+          "Farsiman.Domain.Core.Standard.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "Farsiman.Infraestructure.Core.Entity.Standard/1.0.0.0": {
+        "runtime": {
+          "Farsiman.Infraestructure.Core.Entity.Standard.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
       }
     }
   },
@@ -912,26 +908,12 @@
       "path": "farsiman.domain.core.validations.standard/1.0.0",
       "hashPath": "farsiman.domain.core.validations.standard.1.0.0.nupkg.sha512"
     },
-    "Farsiman.Dominio.Core.Standard/1.1.5": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-J0Wkn2K2waQLa2Xz4e3WFgsuCQ7M7drLx3HHOpwhvIk0KhiU1KWDmEKEPfuecuFtk/xV8YmJkKmf8HxyC6zeBA==",
-      "path": "farsiman.dominio.core.standard/1.1.5",
-      "hashPath": "farsiman.dominio.core.standard.1.1.5.nupkg.sha512"
-    },
     "Farsiman.Extensions.Configuration/2.29723.0": {
       "type": "package",
       "serviceable": true,
       "sha512": "sha512-9uSf5ra27maKdFbrIxJrZ5mVLGi31OWfTJdPNYHt+XVGIeUa5vz9yXZIePWtZGjaOC+SQLBF1f6Zo25ri0/8mQ==",
       "path": "farsiman.extensions.configuration/2.29723.0",
       "hashPath": "farsiman.extensions.configuration.2.29723.0.nupkg.sha512"
-    },
-    "Farsiman.Infraestructure.Core.Entity.Standard/6.2.2.6": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-ikIgDw94svtX7GyvY1eKro/KmQCtVfQ/QR7pF5mDqw/CtnBmvKuysnnMtUbJuTg9lJgVocFGJ25Cgx5M+PFr3A==",
-      "path": "farsiman.infraestructure.core.entity.standard/6.2.2.6",
-      "hashPath": "farsiman.infraestructure.core.entity.standard.6.2.2.6.nupkg.sha512"
     },
     "FluentValidation/11.9.0": {
       "type": "package",
@@ -1527,6 +1509,16 @@
       "sha512": "sha512-CeWTdRNfRaSh0pm2gDTJFwVaXfTq6Xwv/sA887iwPTneW7oMtMlpvDIO+U60+3GWTB7Aom6oQwv5VZVUhQRdPQ==",
       "path": "system.windows.extensions/4.7.0",
       "hashPath": "system.windows.extensions.4.7.0.nupkg.sha512"
+    },
+    "Farsiman.Domain.Core.Standard/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Farsiman.Infraestructure.Core.Entity.Standard/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
     }
   }
 }

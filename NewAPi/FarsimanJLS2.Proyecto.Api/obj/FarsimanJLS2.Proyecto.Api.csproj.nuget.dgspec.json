@@ -69,10 +69,6 @@
               "target": "Package",
               "version": "[2.29723.0, )"
             },
-            "Farsiman.Infraestructure.Core.Entity.Standard": {
-              "target": "Package",
-              "version": "[6.2.2.6, )"
-            },
             "FluentValidation": {
               "target": "Package",
               "version": "[11.9.0, )"

@@ -71,15 +71,6 @@
           "lib/netstandard2.0/Farsiman.Domain.Core.Validations.Standard.dll": {}
         }
       },
-      "Farsiman.Dominio.Core.Standard/1.1.5": {
-        "type": "package",
-        "compile": {
-          "lib/netstandard2.0/Farsiman.Domain.Core.Standard.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard2.0/Farsiman.Domain.Core.Standard.dll": {}
-        }
-      },
       "Farsiman.Extensions.Configuration/2.29723.0": {
         "type": "package",
         "dependencies": {
@@ -90,20 +81,6 @@
         },
         "runtime": {
           "lib/netstandard2.0/Farsiman.Extensions.Configuration.dll": {}
-        }
-      },
-      "Farsiman.Infraestructure.Core.Entity.Standard/6.2.2.6": {
-        "type": "package",
-        "dependencies": {
-          "Farsiman.Dominio.Core.Standard": "1.1.5",
-          "Microsoft.EntityFrameworkCore": "2.2.6",
-          "Microsoft.EntityFrameworkCore.Relational": "2.2.6"
-        },
-        "compile": {
-          "lib/netstandard2.0/Farsiman.Infraestructure.Core.Entity.Standard.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard2.0/Farsiman.Infraestructure.Core.Entity.Standard.dll": {}
         }
       },
       "FluentValidation/11.9.0": {
@@ -1630,17 +1607,6 @@
         "lib/netstandard2.0/Farsiman.Domain.Core.Validations.Standard.dll"
       ]
     },
-    "Farsiman.Dominio.Core.Standard/1.1.5": {
-      "sha512": "J0Wkn2K2waQLa2Xz4e3WFgsuCQ7M7drLx3HHOpwhvIk0KhiU1KWDmEKEPfuecuFtk/xV8YmJkKmf8HxyC6zeBA==",
-      "type": "package",
-      "path": "farsiman.dominio.core.standard/1.1.5",
-      "files": [
-        ".nupkg.metadata",
-        "farsiman.dominio.core.standard.1.1.5.nupkg.sha512",
-        "farsiman.dominio.core.standard.nuspec",
-        "lib/netstandard2.0/Farsiman.Domain.Core.Standard.dll"
-      ]
-    },
     "Farsiman.Extensions.Configuration/2.29723.0": {
       "sha512": "9uSf5ra27maKdFbrIxJrZ5mVLGi31OWfTJdPNYHt+XVGIeUa5vz9yXZIePWtZGjaOC+SQLBF1f6Zo25ri0/8mQ==",
       "type": "package",
@@ -1650,17 +1616,6 @@
         "farsiman.extensions.configuration.2.29723.0.nupkg.sha512",
         "farsiman.extensions.configuration.nuspec",
         "lib/netstandard2.0/Farsiman.Extensions.Configuration.dll"
-      ]
-    },
-    "Farsiman.Infraestructure.Core.Entity.Standard/6.2.2.6": {
-      "sha512": "ikIgDw94svtX7GyvY1eKro/KmQCtVfQ/QR7pF5mDqw/CtnBmvKuysnnMtUbJuTg9lJgVocFGJ25Cgx5M+PFr3A==",
-      "type": "package",
-      "path": "farsiman.infraestructure.core.entity.standard/6.2.2.6",
-      "files": [
-        ".nupkg.metadata",
-        "farsiman.infraestructure.core.entity.standard.6.2.2.6.nupkg.sha512",
-        "farsiman.infraestructure.core.entity.standard.nuspec",
-        "lib/netstandard2.0/Farsiman.Infraestructure.Core.Entity.Standard.dll"
       ]
     },
     "FluentValidation/11.9.0": {
@@ -3918,7 +3873,6 @@
       "Farsiman.AuthServer.Extensions >= 1.0.35371",
       "Farsiman.Domain.Core.Validations.Standard >= 1.0.0",
       "Farsiman.Extensions.Configuration >= 2.29723.0",
-      "Farsiman.Infraestructure.Core.Entity.Standard >= 6.2.2.6",
       "FluentValidation >= 11.9.0",
       "Microsoft.AspNetCore.Mvc.NewtonsoftJson >= 6.0.25",
       "Microsoft.EntityFrameworkCore >= 6.0.25",
@@ -3996,10 +3950,6 @@
           "Farsiman.Extensions.Configuration": {
             "target": "Package",
             "version": "[2.29723.0, )"
-          },
-          "Farsiman.Infraestructure.Core.Entity.Standard": {
-            "target": "Package",
-            "version": "[6.2.2.6, )"
           },
           "FluentValidation": {
             "target": "Package",

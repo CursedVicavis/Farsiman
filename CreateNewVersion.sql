@@ -1,5 +1,5 @@
 --CREATE DATABASE BOCE_DB
-
+use BOCE_DB
 
 CREATE TABLE Perfiles(
   IdPerfil					INT IDENTITY,  
@@ -13,6 +13,8 @@ CREATE TABLE Perfiles(
   CONSTRAINT PK_dbo_Perfiles_IdRol PRIMARY KEY(IdPerfil)
 )
 GO
+INSERT INTO Perfiles(Nombre,UsuarioCreacionId,FechaCreacion)
+VALUES('Admin',1,GETDATE())
 
 CREATE TABLE Permisos(
   IdPermiso					INT IDENTITY,
@@ -26,6 +28,8 @@ CREATE TABLE Permisos(
   CONSTRAINT PK_dbo_Permisos_IdPantalla PRIMARY KEY(IdPermiso)
 )
 GO
+INSERT INTO Permisos(Nombre,UsuarioCreacionId,FechaCreacion)
+VALUES ('Digitador',1,GETDATE())
 
 
 CREATE TABLE PerfilesPorPermisos(
@@ -44,6 +48,8 @@ CREATE TABLE PerfilesPorPermisos(
   CONSTRAINT FK_dbo_PerfilesPorPermisos_dbo_Permisos_IdPermiso		FOREIGN KEY(IdPermiso)		REFERENCES Permisos(IdPermiso),
 );
 GO
+INSERT INTO PerfilesPorPermisos(IdPerfil,IdPermiso,UsuarioCreacionId,FechaCreacion)
+VALUES(1,1,1,GETDATE())
 
 CREATE TABLE Empleados(
 IdEmpleado					INT IDENTITY (1,1),
@@ -59,6 +65,8 @@ Direccion					VARCHAR(150)	NOT NULL,
 CONSTRAINT PK_dbo_Empleados_IdEmpleado PRIMARY KEY (IdEmpleado)
 )
 GO
+INSERT INTO Empleados(Nombre,Apellido,Direccion,UsuarioCreacionId,FechaCreacion)
+VALUES('Javier','Lope','Alado de la pulperia mi pequeña bendicion',1,GETDATE())
 
 CREATE TABLE Usuarios (
 IdUsuario					INT IDENTITY (1,1),
@@ -77,9 +85,10 @@ Activo						BIT				NOT NULL DEFAULT 1
 CONSTRAINT PK_dbo_Usarios_IdUsuario PRIMARY KEY (IdUsuario),
 CONSTRAINT FK_dbo_Usuarios_IdEmpleado_dbo_Empleados_IdEmpleado FOREIGN KEY (IdEmpleado) REFERENCES Empleados (IdEmpleado) ,
 CONSTRAINT FK_dbo_Usuarios_IdPermiso_dbo_Permisos_IdPermiso FOREIGN KEY (IdPermiso) REFERENCES Permisos (IdPermiso) 
-)
+)--CAMBIAR
 GO
-
+INSERT INTO Usuarios (IdEmpleado,Nombre,Contrasena,EsAdmin,IdPermiso,UsuarioCreacionId,FechaCreacion)
+VALUES(1,'javin','123',1,1,1,GETDATE())
 CREATE TABLE Productos(
 IdProductos					INT IDENTITY (1,1),
 Nombre						VARCHAR(150)	NOT NULL,

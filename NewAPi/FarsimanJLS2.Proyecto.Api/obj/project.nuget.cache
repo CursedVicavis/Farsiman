@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "AWEwTDf9XJlysXAhVNTKSGszrcu/g4yYWbd17nR23Te19aNQbTmxaZSBO8kMjA+idekjVvvOdwycTFH5kA9EfQ==",
+  "dgSpecHash": "WUy6FBG2RMYZXPT0DKr1v1ozTgezAUrcdfKOGqu+2GYjbHSWqwJhid8vHiOsfhExiugslTBxvvOi4QVjwrSIpA==",
   "success": true,
   "projectFilePath": "C:\\Users\\jelopez\\Desktop\\Farsiman\\NewAPi\\FarsimanJLS2.Proyecto.Api\\FarsimanJLS2.Proyecto.Api.csproj",
   "expectedPackageFiles": [
@@ -9,9 +9,7 @@
     "C:\\Users\\jelopez\\.nuget\\packages\\farsiman.application.core.standard\\3.0.1\\farsiman.application.core.standard.3.0.1.nupkg.sha512",
     "C:\\Users\\jelopez\\.nuget\\packages\\farsiman.authserver.extensions\\1.0.35371\\farsiman.authserver.extensions.1.0.35371.nupkg.sha512",
     "C:\\Users\\jelopez\\.nuget\\packages\\farsiman.domain.core.validations.standard\\1.0.0\\farsiman.domain.core.validations.standard.1.0.0.nupkg.sha512",
-    "C:\\Users\\jelopez\\.nuget\\packages\\farsiman.dominio.core.standard\\1.1.5\\farsiman.dominio.core.standard.1.1.5.nupkg.sha512",
     "C:\\Users\\jelopez\\.nuget\\packages\\farsiman.extensions.configuration\\2.29723.0\\farsiman.extensions.configuration.2.29723.0.nupkg.sha512",
-    "C:\\Users\\jelopez\\.nuget\\packages\\farsiman.infraestructure.core.entity.standard\\6.2.2.6\\farsiman.infraestructure.core.entity.standard.6.2.2.6.nupkg.sha512",
     "C:\\Users\\jelopez\\.nuget\\packages\\fluentvalidation\\11.9.0\\fluentvalidation.11.9.0.nupkg.sha512",
     "C:\\Users\\jelopez\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\jelopez\\.nuget\\packages\\identitymodel\\6.0.0\\identitymodel.6.0.0.nupkg.sha512",
