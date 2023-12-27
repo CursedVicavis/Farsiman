@@ -1,6 +1,6 @@
-﻿using Farsiman.Application.Core.Standard.DTOs;
-using FarsimanJLS2.Proyecto.Api._Features.Seguridad;
+﻿using FarsimanJLS2.Proyecto.Api._Features.Seguridad;
 using FarsimanJLS2.Proyecto.Api._Features.Seguridad.SeguridadDto;
+using Farsiman.Application.Core.Standard.DTOs;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FarsimanJLS2.Proyecto.Api.Controllers

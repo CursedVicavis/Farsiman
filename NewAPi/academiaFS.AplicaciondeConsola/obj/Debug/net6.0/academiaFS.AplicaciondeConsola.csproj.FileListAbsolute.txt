@@ -1,0 +1,15 @@
+C:\Users\jelopez\Desktop\Farsiman\NewAPi\academiaFS.AplicaciondeConsola\bin\Debug\net6.0\academiaFS.AplicaciondeConsola.exe
+C:\Users\jelopez\Desktop\Farsiman\NewAPi\academiaFS.AplicaciondeConsola\bin\Debug\net6.0\academiaFS.AplicaciondeConsola.deps.json
+C:\Users\jelopez\Desktop\Farsiman\NewAPi\academiaFS.AplicaciondeConsola\bin\Debug\net6.0\academiaFS.AplicaciondeConsola.runtimeconfig.json
+C:\Users\jelopez\Desktop\Farsiman\NewAPi\academiaFS.AplicaciondeConsola\bin\Debug\net6.0\academiaFS.AplicaciondeConsola.dll
+C:\Users\jelopez\Desktop\Farsiman\NewAPi\academiaFS.AplicaciondeConsola\bin\Debug\net6.0\academiaFS.AplicaciondeConsola.pdb
+C:\Users\jelopez\Desktop\Farsiman\NewAPi\academiaFS.AplicaciondeConsola\obj\Debug\net6.0\academiaFS.AplicaciondeConsola.csproj.AssemblyReference.cache
+C:\Users\jelopez\Desktop\Farsiman\NewAPi\academiaFS.AplicaciondeConsola\obj\Debug\net6.0\academiaFS.AplicaciondeConsola.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\jelopez\Desktop\Farsiman\NewAPi\academiaFS.AplicaciondeConsola\obj\Debug\net6.0\academiaFS.AplicaciondeConsola.AssemblyInfoInputs.cache
+C:\Users\jelopez\Desktop\Farsiman\NewAPi\academiaFS.AplicaciondeConsola\obj\Debug\net6.0\academiaFS.AplicaciondeConsola.AssemblyInfo.cs
+C:\Users\jelopez\Desktop\Farsiman\NewAPi\academiaFS.AplicaciondeConsola\obj\Debug\net6.0\academiaFS.AplicaciondeConsola.csproj.CoreCompileInputs.cache
+C:\Users\jelopez\Desktop\Farsiman\NewAPi\academiaFS.AplicaciondeConsola\obj\Debug\net6.0\academiaFS.AplicaciondeConsola.dll
+C:\Users\jelopez\Desktop\Farsiman\NewAPi\academiaFS.AplicaciondeConsola\obj\Debug\net6.0\refint\academiaFS.AplicaciondeConsola.dll
+C:\Users\jelopez\Desktop\Farsiman\NewAPi\academiaFS.AplicaciondeConsola\obj\Debug\net6.0\academiaFS.AplicaciondeConsola.pdb
+C:\Users\jelopez\Desktop\Farsiman\NewAPi\academiaFS.AplicaciondeConsola\obj\Debug\net6.0\academiaFS.AplicaciondeConsola.genruntimeconfig.cache
+C:\Users\jelopez\Desktop\Farsiman\NewAPi\academiaFS.AplicaciondeConsola\obj\Debug\net6.0\ref\academiaFS.AplicaciondeConsola.dll

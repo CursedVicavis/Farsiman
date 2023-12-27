@@ -33,10 +33,10 @@ namespace FarsimanJLS2.Proyecto.Api.Infrastructure.BodegBD.Maps.Seguridad
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_dbo_Usuarios_IdEmpleado_dbo_Empleados_IdEmpleado");
 
-            builder.HasOne(d => d.IdPermisoNavigation)
+            builder.HasOne(d => d.IdPerfilNavigation)
                 .WithMany(p => p.Usuarios)
-                .HasForeignKey(d => d.IdPermiso)
-                .HasConstraintName("FK_dbo_Usuarios_IdPermiso_dbo_Permisos_IdPermiso");
+                .HasForeignKey(d => d.IdPerfil)
+                .HasConstraintName("FK_dbo_Usuarios_IdPermiso_dbo_Perfiles_IdPerfil");
         }
     }
 }

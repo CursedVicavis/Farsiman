@@ -2,7 +2,7 @@
 {
     public class ProductoDto
     {
-        public int IdProductos { get; set; }
+        public int IdProducto { get; set; }
         public string Nombre { get; set; } = null!;
         public int UsuarioCreacionId { get; set; }
         public DateTime FechaCreacion { get; set; }

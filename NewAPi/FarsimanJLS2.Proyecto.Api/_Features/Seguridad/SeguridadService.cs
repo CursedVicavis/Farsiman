@@ -27,7 +27,7 @@ namespace FarsimanJLS2.Proyecto.Api._Features.Seguridad
                                 IdUsuario = usuario.IdUsuario,
                                 Nombre = usuario.Nombre,
                                 EsAdmin = usuario.EsAdmin,
-                                IdPermiso = usuario.IdPermiso,
+                                IdPerfil = usuario.IdPerfil,
                                 Activo = usuario.Activo
                             }).ToList();
             return Respuesta.Success<List<UsuarioDto>>(usuarios, Mensajes_Globales.Listado, Codigos_Globales.Success);
@@ -86,7 +86,7 @@ namespace FarsimanJLS2.Proyecto.Api._Features.Seguridad
                 usuarioMapeado.Nombre = usuarios.Nombre;
                 usuarioMapeado.Contrasena = usuarios.Contrasena;
                 usuarioMapeado.EsAdmin = usuarios.EsAdmin;
-                usuarioMapeado.IdPermiso = usuarios.IdPermiso;
+                usuarioMapeado.IdPerfil = usuarios.IdPerfil;
                 usuarioMapeado.UsuarioCreacionId = usuarios.UsuarioCreacionId;
                 usuarioMapeado.FechaCreacion = usuarios.FechaCreacion;
                 usuarioMapeado.UsuarioModificiacionId = usuarios.UsuarioModificiacionId;

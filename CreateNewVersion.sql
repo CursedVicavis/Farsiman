@@ -74,7 +74,7 @@ IdEmpleado					INT NOT NULL,
 Nombre						VARCHAR(150)	NOT NULL,
 Contrasena					VARCHAR(150)	NOT NULL,
 EsAdmin						BIT				,
-IdPermiso					INT				,
+IdPerfil					INT				,
 
 UsuarioCreacionId			INT				NOT NULL,
 FechaCreacion				DATETIME		NOT NULL ,
@@ -84,10 +84,10 @@ Activo						BIT				NOT NULL DEFAULT 1
 
 CONSTRAINT PK_dbo_Usarios_IdUsuario PRIMARY KEY (IdUsuario),
 CONSTRAINT FK_dbo_Usuarios_IdEmpleado_dbo_Empleados_IdEmpleado FOREIGN KEY (IdEmpleado) REFERENCES Empleados (IdEmpleado) ,
-CONSTRAINT FK_dbo_Usuarios_IdPermiso_dbo_Permisos_IdPermiso FOREIGN KEY (IdPermiso) REFERENCES Permisos (IdPermiso) 
+CONSTRAINT FK_dbo_Usuarios_IdPermiso_dbo_Perfiles_IdPerfil FOREIGN KEY (IdPerfil) REFERENCES Perfiles (IdPerfil) 
 )--CAMBIAR
 GO
-INSERT INTO Usuarios (IdEmpleado,Nombre,Contrasena,EsAdmin,IdPermiso,UsuarioCreacionId,FechaCreacion)
+INSERT INTO Usuarios (IdEmpleado,Nombre,Contrasena,EsAdmin,IdPerfil,UsuarioCreacionId,FechaCreacion)
 VALUES(1,'javin','123',1,1,1,GETDATE())
 CREATE TABLE Productos(
 IdProductos					INT IDENTITY (1,1),

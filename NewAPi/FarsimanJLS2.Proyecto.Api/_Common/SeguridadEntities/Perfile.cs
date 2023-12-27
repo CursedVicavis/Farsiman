@@ -19,5 +19,6 @@ namespace FarsimanJLS2.Proyecto.Api
         public bool? Activo { get; set; }
 
         public virtual ICollection<PerfilesPorPermiso> PerfilesPorPermisos { get; set; }
+        public virtual ICollection<Usuario> Usuarios { get; set; }
     }
 }

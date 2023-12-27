@@ -6,6 +6,7 @@ using Farsiman.Application.Core.Standard.DTOs;
 using Farsiman.Infraestructure.Core.Entity.Standard;
 using FarsimanJLS2.Proyecto.Api._Features.Seguridad.SeguridadDto;
 using System;
+using FarsimanJLS2.Proyecto.Api._Features.Generales.GeneralesDto;
 
 namespace FarsimanJLS2.Proyecto.Api._Features.Seguridad
 {
@@ -25,7 +26,7 @@ namespace FarsimanJLS2.Proyecto.Api._Features.Seguridad
             var Productos = (from Producto in _unitOfWork.Repository<Producto>().AsQueryable()
                             select new ProductoDto
                             {
-                                IdProductos = Producto.IdProducto,
+                                IdProducto = Producto.IdProducto,
                                 Nombre = Producto.Nombre,
                                 Activo = Producto.Activo
                             }).ToList();
@@ -52,7 +53,7 @@ namespace FarsimanJLS2.Proyecto.Api._Features.Seguridad
             _unitOfWork.SaveChanges();
 
 
-            Productos.IdProducto = ProductoMapeado.IdProductos;
+            Productos.IdProducto = ProductoMapeado.IdProducto;
 
             return Respuesta.Success(Productos, Mensajes_Globales.Agregado, Codigos_Globales.Success);
 
@@ -81,7 +82,7 @@ namespace FarsimanJLS2.Proyecto.Api._Features.Seguridad
                     return menssageValidation;
                 }
                 */
-                ProductoMapeado.IdProductos = Productos.IdProducto;
+                ProductoMapeado.IdProducto = Productos.IdProducto;
                 ProductoMapeado.Nombre = Productos.Nombre;
                 ProductoMapeado.Activo = Productos.Activo;
                 ProductoMapeado.UsuarioCreacionId = Productos.UsuarioCreacionId;

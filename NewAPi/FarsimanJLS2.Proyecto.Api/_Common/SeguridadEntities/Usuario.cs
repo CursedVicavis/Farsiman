@@ -29,7 +29,7 @@ namespace FarsimanJLS2.Proyecto.Api
         public string Nombre { get; set; } = null!;
         public string Contrasena { get; set; } = null!;
         public bool? EsAdmin { get; set; }
-        public int? IdPermiso { get; set; }
+        public int? IdPerfil { get; set; }
         public int UsuarioCreacionId { get; set; }
         public DateTime FechaCreacion { get; set; }
         public int? UsuarioModificiacionId { get; set; }
@@ -37,7 +37,7 @@ namespace FarsimanJLS2.Proyecto.Api
         public bool? Activo { get; set; }
 
         public virtual Empleado IdEmpleadoNavigation { get; set; } = null!;
-        public virtual Permiso? IdPermisoNavigation { get; set; }
+        public virtual Perfile? IdPerfilNavigation { get; set; }
         public virtual ICollection<Estado> EstadoUsuarioCreacions { get; set; }
         public virtual ICollection<Estado> EstadoUsuarioModificiacions { get; set; }
         public virtual ICollection<Producto> ProductoUsuarioCreacions { get; set; }

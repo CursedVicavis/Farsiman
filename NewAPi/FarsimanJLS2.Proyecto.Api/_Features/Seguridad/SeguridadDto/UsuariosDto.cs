@@ -7,7 +7,7 @@
         public string Nombre { get; set; } = null!;
         public string Contrasena { get; set; } = null!;
         public bool? EsAdmin { get; set; }
-        public int? IdPermiso { get; set; }
+        public int? IdPerfil { get; set; }
         public int UsuarioCreacionId { get; set; }
         public DateTime FechaCreacion { get; set; }
         public int? UsuarioModificiacionId { get; set; }

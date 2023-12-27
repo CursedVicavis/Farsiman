@@ -5,7 +5,7 @@ namespace FarsimanJLS2.Proyecto.Api
 {
     public partial class Producto
     {
-        public int IdProductos { get; set; }
+        public int IdProducto { get; set; }
         public string Nombre { get; set; } = null!;
         public int UsuarioCreacionId { get; set; }
         public DateTime FechaCreacion { get; set; }

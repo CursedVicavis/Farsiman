@@ -23,7 +23,7 @@ namespace FarsimanJLS2.Proyecto.Api.Infrastructure.BodegBD
             CreateMap<PerfileDto, Perfile>().ReverseMap();
             CreateMap<PerfilePorPermisoDto, PerfilesPorPermiso>().ReverseMap();
             CreateMap<PermisoDto, Permiso>().ReverseMap();
-            CreateMap<UsuariosDto, Usuario>().ReverseMap();
+            CreateMap<UsuarioDto, Usuario>().ReverseMap();
             CreateMap<SucursaleDto, Sucursale>().ReverseMap();
         }
     }
