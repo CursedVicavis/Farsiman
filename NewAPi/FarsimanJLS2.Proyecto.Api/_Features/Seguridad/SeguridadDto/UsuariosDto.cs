@@ -1,6 +1,6 @@
 ﻿namespace FarsimanJLS2.Proyecto.Api._Features.Seguridad.SeguridadDto
 {
-    public class UsuariosDto
+    public class UsuarioDto
     {
         public int IdUsuario { get; set; }
         public int IdEmpleado { get; set; }

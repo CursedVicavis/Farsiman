@@ -83,3 +83,6 @@ C:\Users\jelopez\Desktop\Farsiman\NewAPi\FarsimanJLS2.Proyecto.Api\obj\Debug\net
 C:\Users\jelopez\Desktop\Farsiman\NewAPi\FarsimanJLS2.Proyecto.Api\obj\Debug\net6.0\FarsimanJLS2.Proyecto.Api.pdb
 C:\Users\jelopez\Desktop\Farsiman\NewAPi\FarsimanJLS2.Proyecto.Api\obj\Debug\net6.0\FarsimanJLS2.Proyecto.Api.genruntimeconfig.cache
 C:\Users\jelopez\Desktop\Farsiman\NewAPi\FarsimanJLS2.Proyecto.Api\obj\Debug\net6.0\ref\FarsimanJLS2.Proyecto.Api.dll
+C:\Users\Javinto7\Documents\GitHub\Farsiman\NewAPi\FarsimanJLS2.Proyecto.Api\obj\Debug\net6.0\FarsimanJLS2.Proyecto.Api.dll
+C:\Users\Javinto7\Documents\GitHub\Farsiman\NewAPi\FarsimanJLS2.Proyecto.Api\obj\Debug\net6.0\refint\FarsimanJLS2.Proyecto.Api.dll
+C:\Users\Javinto7\Documents\GitHub\Farsiman\NewAPi\FarsimanJLS2.Proyecto.Api\obj\Debug\net6.0\FarsimanJLS2.Proyecto.Api.pdb

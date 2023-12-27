@@ -19,10 +19,10 @@ namespace FarsimanJLS2.Proyecto.Api._Features.Seguridad
             _unitOfWork = unitOfWork.builderTransporte();
         }
 
-        public Respuesta<List<UsuariosDto>> ListarTransportista()
+        public Respuesta<List<UsuarioDto>> ListarTransportista()
         {
             var usuarios = (from usuario in _unitOfWork.Repository<Usuario>().AsQueryable()
-                            select new UsuariosDto
+                            select new UsuarioDto
                             {
                                 IdUsuario = usuario.IdUsuario,
                                 Nombre = usuario.Nombre,
@@ -30,9 +30,9 @@ namespace FarsimanJLS2.Proyecto.Api._Features.Seguridad
                                 IdPermiso = usuario.IdPermiso,
                                 Activo = usuario.Activo
                             }).ToList();
-            return Respuesta.Success<List<UsuariosDto>>(usuarios, Mensajes_Globales.Listado, Codigos_Globales.Success);
+            return Respuesta.Success<List<UsuarioDto>>(usuarios, Mensajes_Globales.Listado, Codigos_Globales.Success);
         }
-        public Respuesta<UsuariosDto> Insertarusuarios(UsuariosDto usuarios)
+        public Respuesta<UsuarioDto> InsertarUsuarios(UsuarioDto usuarios)
         {
 
             var usuarioMapeado = _mapper.Map<Usuario>(usuarios);
@@ -46,7 +46,7 @@ namespace FarsimanJLS2.Proyecto.Api._Features.Seguridad
             {
                 IEnumerable<string> errores = validationResult.Errors.Select(s => s.ErrorMessage);
                 string menssageValidation = string.Join(Environment.NewLine, errores);
-                return Respuesta.Fault<UsuariosDto>(menssageValidation, Codigos_Globales.BadRequest);
+                return Respuesta.Fault<UsuarioDto>(menssageValidation, Codigos_Globales.BadRequest);
             }
             */
             _unitOfWork.Repository<Usuario>().Add(usuarioMapeado);
@@ -57,6 +57,71 @@ namespace FarsimanJLS2.Proyecto.Api._Features.Seguridad
 
             return Respuesta.Success(usuarios, Mensajes_Globales.Agregado, Codigos_Globales.Success);
 
+        }
+
+        public Respuesta<UsuarioDto> ActualizarUsuario(UsuarioDto usuarios)
+        {
+            if (usuarios.IdUsuario <= 0)
+                return Respuesta.Success(usuarios, Mensajes_Globales.IdVacio, Codigos_Globales.BadRequest);
+
+            Usuario? usuarioMapeado = _unitOfWork.Repository<Usuario>().FirstOrDefault(x => x.IdUsuario == usuarios.IdUsuario);
+            //UsuariosValidator validator = new UsuariosValidator();
+
+            if (usuarioMapeado == null)
+            {
+                return Respuesta.Success(usuarios, Mensajes_Globales.RegistroInexistente, Codigos_Globales.BadRequest);
+            }
+            else
+            {
+
+                //ValidationResult validationResult = validator.Validate(usuarioMapeado);
+               /* if (!validationResult.IsValid)
+                {
+                    IEnumerable<string> errores = validationResult.Errors.Select(s => s.ErrorMessage);
+                    string menssageValidation = string.Join(Environment.NewLine, errores);
+                    return Respuesta.Success(usuarios, menssageValidation, Codigos_Globales.BadRequest);
+                }*/
+
+                usuarioMapeado.IdUsuario = usuarios.IdUsuario;
+                usuarioMapeado.Nombre = usuarios.Nombre;
+                usuarioMapeado.Contrasena = usuarios.Contrasena;
+                usuarioMapeado.EsAdmin = usuarios.EsAdmin;
+                usuarioMapeado.IdPermiso = usuarios.IdPermiso;
+                usuarioMapeado.UsuarioCreacionId = usuarios.UsuarioCreacionId;
+                usuarioMapeado.FechaCreacion = usuarios.FechaCreacion;
+                usuarioMapeado.UsuarioModificiacionId = usuarios.UsuarioModificiacionId;
+                usuarioMapeado.FechaModificacion = usuarios.FechaModificacion;
+
+                _unitOfWork.SaveChanges();
+            }
+            usuarios.IdUsuario = usuarioMapeado.IdUsuario;
+
+            return Respuesta.Success(usuarios, Mensajes_Globales.Editado, Codigos_Globales.Success);
+        }
+
+        public string DesactivarUsuario(UsuarioDto usuarios)
+        {
+            if (usuarios.IdUsuario <= 0)
+                return Mensajes_Globales.IdVacio;
+
+            Usuario? usuarioMapeado = _unitOfWork.Repository<Usuario>().FirstOrDefault(x => x.IdUsuario == usuarios.IdUsuario);
+
+
+            if (usuarioMapeado == null)
+            {
+                return Mensajes_Globales.RegistroInexistente;
+            }
+            else
+            {
+                usuarioMapeado.Activo = false;
+                usuarioMapeado.UsuarioModificiacionId = usuarios.UsuarioModificiacionId;
+                usuarioMapeado.FechaModificacion = usuarios.FechaModificacion;
+
+                _unitOfWork.SaveChanges();
+            }
+            usuarios.IdUsuario = usuarioMapeado.IdUsuario;
+
+            return Mensajes_Globales.Desactivado;
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿using Farsiman.Application.Core.Standard.DTOs;
-using FarsimanJLS2.Proyecto.Api._Features.Seguridad;
+﻿using FarsimanJLS2.Proyecto.Api._Features.Seguridad;
 using FarsimanJLS2.Proyecto.Api._Features.Seguridad.SeguridadDto;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,18 +6,17 @@ namespace FarsimanJLS2.Proyecto.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UsuarioController : Controller
+    public class UsuariosController : Controller
     {
-        private readonly SeguridadService _UsuariosService;
-
-        public UsuarioController(SeguridadService UsuariosService)
+        private readonly UsuariosService _UsuariosService;
+        public UsuarioController(UsuariosService UsuariosService)
         {
             _UsuariosService = UsuariosService;
         }
         [HttpGet("Listar")]
         public IActionResult listarUsuarios()
         {
-            Respuesta<List<UsuarioDto>> resultado = _UsuariosService.ListarTransportista();
+            Respuesta<List<UsuarioDto>> resultado = _UsuariosService.ListarUsuarios();
             return Ok(resultado);
         }
         [HttpPost("Insertar")]

@@ -51,6 +51,7 @@ builder.Services.AddDbContext<BOCE_DBContext>(options =>
 });
 builder.Services.AddTransient<UnitOfWorkBuilder, UnitOfWorkBuilder>();
 builder.Services.AddAutoMapper(typeof(MapProfile));
+builder.Services.AddTransient<ProductosService>();
 builder.Services.AddTransient<SeguridadService>();
 
 var app = builder.Build();
