@@ -11,5 +11,6 @@
         public static string Vacio = "Este campo esta vacio";
         public static string IdVacio = "Ingrese el id";
         public static string RegistroInexistente = "Este Registro no existe";
+        public static string RegistroRepetido = "Este Registro ya existe";
     }
 }

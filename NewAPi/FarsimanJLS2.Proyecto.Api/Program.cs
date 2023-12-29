@@ -53,6 +53,7 @@ builder.Services.AddTransient<UnitOfWorkBuilder, UnitOfWorkBuilder>();
 builder.Services.AddAutoMapper(typeof(MapProfile));
 builder.Services.AddTransient<ProductosService>();
 builder.Services.AddTransient<SeguridadService>();
+builder.Services.AddTransient<SeguridadDomain>();
 
 var app = builder.Build();
 

@@ -6,39 +6,55 @@ using Farsiman.Application.Core.Standard.DTOs;
 using Farsiman.Infraestructure.Core.Entity.Standard;
 using FarsimanJLS2.Proyecto.Api._Features.Seguridad.SeguridadDto;
 using FarsimanJLS2.Proyecto.Api._Features.Sucursales.SucursalesDto;
+using System.Data;
 
 namespace FarsimanJLS2.Proyecto.Api._Features.Seguridad
 {
-    public class SeguridadService
+    public class SeguridadService : IUsuariosService<UsuarioDto, UsuariosViewDto>
     {
         private readonly IMapper _mapper;
         private readonly UnitOfWork _unitOfWork;
+        private readonly SeguridadDomain _seguridadDomain;
 
-        public SeguridadService(IMapper mapper, UnitOfWorkBuilder unitOfWork)
+        public SeguridadService(IMapper mapper, UnitOfWorkBuilder unitOfWork, SeguridadDomain seguridadDomain)
         {
             _mapper = mapper;
             _unitOfWork = unitOfWork.builderTransporte();
+            _seguridadDomain = seguridadDomain;
         }
 
-        public Respuesta<List<UsuarioDto>> ListarUsuarios()
+        public Respuesta<List<UsuariosViewDto>> ListarUsuarios()
         {
             var usuarios = (from usuario in _unitOfWork.Repository<Usuario>().AsQueryable()
-                            select new UsuarioDto
+                            join perfil in _unitOfWork.Repository<Perfile>().AsQueryable()
+                            on usuario.IdPerfil equals perfil.IdPerfil
+                            select new UsuariosViewDto
                             {
                                 IdUsuario = usuario.IdUsuario,
                                 Nombre = usuario.Nombre,
                                 EsAdmin = usuario.EsAdmin,
                                 IdPerfil = usuario.IdPerfil,
+                                NombrePerfil = perfil.Nombre,
                                 Activo = usuario.Activo
                             }).ToList();
-            return Respuesta.Success<List<UsuarioDto>>(usuarios, Mensajes_Globales.Listado, Codigos_Globales.Success);
+            return Respuesta.Success<List<UsuariosViewDto>>(usuarios, Mensajes_Globales.Listado, Codigos_Globales.Success);
         }
-        public Respuesta<UsuarioDto> InsertarUsuarios(UsuarioDto usuarios)
+        public Respuesta<UsuarioDto> InsertarUsuarios(UsuarioDto usuariosDto)
         {
 
-            var usuarioMapeado = _mapper.Map<Usuario>(usuarios);
+            var usuarioMapeado = _mapper.Map<Usuario>(usuariosDto);
             usuarioMapeado.UsuarioModificiacionId = null;
             usuarioMapeado.FechaModificacion = null;
+
+            if (!_seguridadDomain.VaciosValidadUsuarios(usuariosDto))
+                return Respuesta.Success(usuariosDto, Mensajes_Globales.Vacio, Codigos_Globales.BadRequest);
+
+            if (_seguridadDomain.ValidarRolExiste(usuariosDto.IdPerfil, _unitOfWork.Repository<Perfile>().AsQueryable().ToList()))
+                return Respuesta.Success(usuariosDto, Mensajes_Globales.RegistroInexistente, Codigos_Globales.BadRequest);
+
+            if (_seguridadDomain.ValidarUsuarioExiste(usuariosDto, _unitOfWork.Repository<Usuario>().AsQueryable().ToList()))
+                return Respuesta.Success(usuariosDto, Mensajes_Globales.RegistroRepetido, Codigos_Globales.BadRequest);
+
             /*
             UsuariosValidator validator = new UsuariosValidator();
 
@@ -53,22 +69,30 @@ namespace FarsimanJLS2.Proyecto.Api._Features.Seguridad
             _unitOfWork.Repository<Usuario>().Add(usuarioMapeado);
             _unitOfWork.SaveChanges();
 
-            usuarios.IdUsuario = usuarioMapeado.IdUsuario;
+            usuariosDto.IdUsuario = usuarioMapeado.IdUsuario;
 
-            return Respuesta.Success(usuarios, Mensajes_Globales.Agregado, Codigos_Globales.Success);
-
+            return Respuesta.Success(usuariosDto, Mensajes_Globales.Agregado, Codigos_Globales.Success);
         }
 
-        public Respuesta<UsuarioDto> ActualizarUsuario(UsuarioDto usuarios)
+        public Respuesta<UsuarioDto> ActualizarUsuarios(UsuarioDto usuariosDto)
         {
-            if (usuarios.IdUsuario <= 0)
-                return Respuesta.Success(usuarios, Mensajes_Globales.IdVacio, Codigos_Globales.BadRequest);
+            if (usuariosDto.IdUsuario <= 0)
+                return Respuesta.Success(usuariosDto, Mensajes_Globales.IdVacio, Codigos_Globales.BadRequest);
 
-            Usuario? usuarioMapeado = _unitOfWork.Repository<Usuario>().FirstOrDefault(x => x.IdUsuario == usuarios.IdUsuario);
+            if (!_seguridadDomain.VaciosValidadUsuarios(usuariosDto))
+                return Respuesta.Success(usuariosDto, Mensajes_Globales.Vacio, Codigos_Globales.BadRequest);
+
+            if (_seguridadDomain.ValidarRolExiste(usuariosDto.IdPerfil, _unitOfWork.Repository<Perfile>().AsQueryable().ToList()))
+                return Respuesta.Success(usuariosDto, Mensajes_Globales.RegistroInexistente, Codigos_Globales.BadRequest);
+
+            if (_seguridadDomain.ValidarUsuarioExiste(usuariosDto, _unitOfWork.Repository<Usuario>().AsQueryable().ToList()))
+                return Respuesta.Success(usuariosDto, Mensajes_Globales.RegistroRepetido, Codigos_Globales.BadRequest);
+
+            Usuario? usuarioMapeado = _unitOfWork.Repository<Usuario>().FirstOrDefault(x => x.IdUsuario == usuariosDto.IdUsuario);
             //UsuariosValidator validator = new UsuariosValidator();
 
             if (usuarioMapeado == null)
-                return Respuesta.Success(usuarios, Mensajes_Globales.RegistroInexistente, Codigos_Globales.BadRequest);
+                return Respuesta.Success(usuariosDto, Mensajes_Globales.RegistroInexistente, Codigos_Globales.BadRequest);
             else
             {
 
@@ -80,40 +104,41 @@ namespace FarsimanJLS2.Proyecto.Api._Features.Seguridad
                     return Respuesta.Success(usuarios, menssageValidation, Codigos_Globales.BadRequest);
                 }*/
 
-                usuarioMapeado.IdUsuario = usuarios.IdUsuario;
-                usuarioMapeado.Nombre = usuarios.Nombre;
-                usuarioMapeado.Contrasena = usuarios.Contrasena;
-                usuarioMapeado.EsAdmin = usuarios.EsAdmin;
-                usuarioMapeado.IdPerfil = usuarios.IdPerfil;
-                usuarioMapeado.UsuarioModificiacionId = usuarios.UsuarioModificiacionId;
-                usuarioMapeado.FechaModificacion = usuarios.FechaModificacion;
+                usuarioMapeado.IdUsuario = usuariosDto.IdUsuario;
+                usuarioMapeado.Nombre = usuariosDto.Nombre;
+                usuarioMapeado.Contrasena = usuariosDto.Contrasena;
+                usuarioMapeado.EsAdmin = usuariosDto.EsAdmin;
+                usuarioMapeado.IdPerfil = usuariosDto.IdPerfil;
+                usuarioMapeado.UsuarioModificiacionId = usuariosDto.UsuarioModificiacionId;
+                usuarioMapeado.FechaModificacion = usuariosDto.FechaModificacion;
 
                 _unitOfWork.SaveChanges();
             }
+            usuariosDto.IdUsuario = usuarioMapeado.IdUsuario;
 
-            return Respuesta.Success(usuarios, Mensajes_Globales.Editado, Codigos_Globales.Success);
+            return Respuesta.Success(usuariosDto, Mensajes_Globales.Editado, Codigos_Globales.Success);
         }
 
-        public Respuesta<UsuarioDto> DesactivarUsuario(UsuarioDto usuarios)
+        public Respuesta<UsuarioDto> DesactivarUsuarios(UsuarioDto usuariosDto)
         {
-            if (usuarios.IdUsuario <= 0)
+            if (usuariosDto.IdUsuario <= 0)
                 return Mensajes_Globales.IdVacio;
 
-            Usuario? usuarioMapeado = _unitOfWork.Repository<Usuario>().FirstOrDefault(x => x.IdUsuario == usuarios.IdUsuario);
+            Usuario? usuarioMapeado = _unitOfWork.Repository<Usuario>().FirstOrDefault(x => x.IdUsuario == usuariosDto.IdUsuario);
 
 
             if (usuarioMapeado == null)
-                return Respuesta.Success(usuarios, Mensajes_Globales.RegistroInexistente, Codigos_Globales.BadRequest);
+                return Respuesta.Success(usuariosDto, Mensajes_Globales.RegistroInexistente, Codigos_Globales.BadRequest);
             else
             {
                 usuarioMapeado.Activo = false;
-                usuarioMapeado.UsuarioModificiacionId = usuarios.UsuarioModificiacionId;
-                usuarioMapeado.FechaModificacion = usuarios.FechaModificacion;
+                usuarioMapeado.UsuarioModificiacionId = usuariosDto.UsuarioModificiacionId;
+                usuarioMapeado.FechaModificacion = usuariosDto.FechaModificacion;
 
                 _unitOfWork.SaveChanges();
             }
 
-            return Respuesta.Success(usuarios, Mensajes_Globales.Editado, Codigos_Globales.Success);
+            return Respuesta.Success(usuariosDto, Mensajes_Globales.Editado, Codigos_Globales.Success);
         }
     }
 }

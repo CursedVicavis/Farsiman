@@ -30,13 +30,13 @@ namespace FarsimanJLS2.Proyecto.Api.Controllers
         [HttpPut("Actualizar")]
         public IActionResult ActualizarUsuarios(UsuarioDto Usuario)
         {
-            var resultado = _UsuariosService.ActualizarUsuario(Usuario);
+            var resultado = _UsuariosService.ActualizarUsuarios(Usuario);
             return Ok(resultado);
         }
         [HttpPut("Desactivar")]
         public IActionResult DesactivarUsuarios(UsuarioDto Usuario)
         {
-            var resultado = _UsuariosService.DesactivarUsuario(Usuario);
+            var resultado = _UsuariosService.DesactivarUsuarios(Usuario);
             return Ok(resultado);
         }
     }
