@@ -17,8 +17,8 @@ namespace FarsimanJLS2.Proyecto.Api.Controllers
         }
         [HttpGet("Listar")]
         public IActionResult listarUsuarios()
-        {
-            Respuesta<List<UsuarioDto>> resultado = _UsuariosService.ListarTransportista();
+        { 
+            var resultado = _UsuariosService.ListarUsuarios();
             return Ok(resultado);
         }
         [HttpPost("Insertar")]

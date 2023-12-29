@@ -7,6 +7,7 @@ using Farsiman.Infraestructure.Core.Entity.Standard;
 using FarsimanJLS2.Proyecto.Api._Features.Seguridad.SeguridadDto;
 using System;
 using FarsimanJLS2.Proyecto.Api._Features.Generales.GeneralesDto;
+using FarsimanJLS2.Proyecto.Api._Features.Sucursales.SucursalesDto;
 
 namespace FarsimanJLS2.Proyecto.Api._Features.Seguridad
 {
@@ -21,7 +22,7 @@ namespace FarsimanJLS2.Proyecto.Api._Features.Seguridad
             _unitOfWork = unitOfWork.builderTransporte();
         }
 
-        public Respuesta<List<ProductoDto>> ListarTransportista()
+        public Respuesta<List<ProductoDto>> ListarProductos()
         {
             var Productos = (from Producto in _unitOfWork.Repository<Producto>().AsQueryable()
                             select new ProductoDto
@@ -59,7 +60,7 @@ namespace FarsimanJLS2.Proyecto.Api._Features.Seguridad
 
         }
 
-        public string ActualizarProducto(ProductoDto Productos)
+        public Respuesta<ProductoDto> ActualizarProducto(ProductoDto Productos)
         {
             if (Productos.IdProducto <= 0)
                 return Mensajes_Globales.IdVacio;
@@ -68,9 +69,7 @@ namespace FarsimanJLS2.Proyecto.Api._Features.Seguridad
             //TransportistaValidator validator = new TransportistaValidator();
 
             if (ProductoMapeado == null)
-            {
-                return Mensajes_Globales.RegistroInexistente;
-            }
+                return Respuesta.Success(Productos, Mensajes_Globales.RegistroInexistente, Codigos_Globales.BadRequest);
             else
             {
                 /*
@@ -85,18 +84,15 @@ namespace FarsimanJLS2.Proyecto.Api._Features.Seguridad
                 ProductoMapeado.IdProducto = Productos.IdProducto;
                 ProductoMapeado.Nombre = Productos.Nombre;
                 ProductoMapeado.Activo = Productos.Activo;
-                ProductoMapeado.UsuarioCreacionId = Productos.UsuarioCreacionId;
-                ProductoMapeado.FechaCreacion = Productos.FechaCreacion;
                 ProductoMapeado.UsuarioModificiacionId = Productos.UsuarioModificiacionId;
                 ProductoMapeado.FechaModificacion = Productos.FechaModificacion;
 
                 _unitOfWork.SaveChanges();
             }
-            Productos.IdProducto = ProductoMapeado.IdProducto;
 
-            return Mensajes_Globales.Editado;
+            return Respuesta.Success(Productos, Mensajes_Globales.Agregado, Codigos_Globales.Success);
         }
-        public string DesactivarProducto(ProductoDto Productos)
+        public Respuesta<ProductoDto> DesactivarProducto(ProductoDto Productos)
         {
             if (Productos.IdProducto <= 0)
                 return Mensajes_Globales.IdVacio;
@@ -105,9 +101,7 @@ namespace FarsimanJLS2.Proyecto.Api._Features.Seguridad
 
 
             if (ProductoMapeado == null)
-            {
-                return Mensajes_Globales.RegistroInexistente;
-            }
+                return Respuesta.Success(Productos, Mensajes_Globales.RegistroInexistente, Codigos_Globales.BadRequest);
             else
             {
                 ProductoMapeado.Activo = false;
@@ -116,9 +110,7 @@ namespace FarsimanJLS2.Proyecto.Api._Features.Seguridad
 
                 _unitOfWork.SaveChanges();
             }
-            Productos.IdProducto = ProductoMapeado.IdProducto;
-
-            return Mensajes_Globales.Desactivado;
+            return Respuesta.Success(Productos, Mensajes_Globales.Agregado, Codigos_Globales.Success);
         }
     }
 }

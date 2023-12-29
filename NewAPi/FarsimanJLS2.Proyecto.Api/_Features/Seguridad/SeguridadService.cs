@@ -5,6 +5,7 @@ using AutoMapper;
 using Farsiman.Application.Core.Standard.DTOs;
 using Farsiman.Infraestructure.Core.Entity.Standard;
 using FarsimanJLS2.Proyecto.Api._Features.Seguridad.SeguridadDto;
+using FarsimanJLS2.Proyecto.Api._Features.Sucursales.SucursalesDto;
 
 namespace FarsimanJLS2.Proyecto.Api._Features.Seguridad
 {
@@ -19,7 +20,7 @@ namespace FarsimanJLS2.Proyecto.Api._Features.Seguridad
             _unitOfWork = unitOfWork.builderTransporte();
         }
 
-        public Respuesta<List<UsuarioDto>> ListarTransportista()
+        public Respuesta<List<UsuarioDto>> ListarUsuarios()
         {
             var usuarios = (from usuario in _unitOfWork.Repository<Usuario>().AsQueryable()
                             select new UsuarioDto
@@ -52,7 +53,6 @@ namespace FarsimanJLS2.Proyecto.Api._Features.Seguridad
             _unitOfWork.Repository<Usuario>().Add(usuarioMapeado);
             _unitOfWork.SaveChanges();
 
-
             usuarios.IdUsuario = usuarioMapeado.IdUsuario;
 
             return Respuesta.Success(usuarios, Mensajes_Globales.Agregado, Codigos_Globales.Success);
@@ -68,9 +68,7 @@ namespace FarsimanJLS2.Proyecto.Api._Features.Seguridad
             //UsuariosValidator validator = new UsuariosValidator();
 
             if (usuarioMapeado == null)
-            {
                 return Respuesta.Success(usuarios, Mensajes_Globales.RegistroInexistente, Codigos_Globales.BadRequest);
-            }
             else
             {
 
@@ -87,19 +85,16 @@ namespace FarsimanJLS2.Proyecto.Api._Features.Seguridad
                 usuarioMapeado.Contrasena = usuarios.Contrasena;
                 usuarioMapeado.EsAdmin = usuarios.EsAdmin;
                 usuarioMapeado.IdPerfil = usuarios.IdPerfil;
-                usuarioMapeado.UsuarioCreacionId = usuarios.UsuarioCreacionId;
-                usuarioMapeado.FechaCreacion = usuarios.FechaCreacion;
                 usuarioMapeado.UsuarioModificiacionId = usuarios.UsuarioModificiacionId;
                 usuarioMapeado.FechaModificacion = usuarios.FechaModificacion;
 
                 _unitOfWork.SaveChanges();
             }
-            usuarios.IdUsuario = usuarioMapeado.IdUsuario;
 
             return Respuesta.Success(usuarios, Mensajes_Globales.Editado, Codigos_Globales.Success);
         }
 
-        public string DesactivarUsuario(UsuarioDto usuarios)
+        public Respuesta<UsuarioDto> DesactivarUsuario(UsuarioDto usuarios)
         {
             if (usuarios.IdUsuario <= 0)
                 return Mensajes_Globales.IdVacio;
@@ -108,9 +103,7 @@ namespace FarsimanJLS2.Proyecto.Api._Features.Seguridad
 
 
             if (usuarioMapeado == null)
-            {
-                return Mensajes_Globales.RegistroInexistente;
-            }
+                return Respuesta.Success(usuarios, Mensajes_Globales.RegistroInexistente, Codigos_Globales.BadRequest);
             else
             {
                 usuarioMapeado.Activo = false;
@@ -119,9 +112,8 @@ namespace FarsimanJLS2.Proyecto.Api._Features.Seguridad
 
                 _unitOfWork.SaveChanges();
             }
-            usuarios.IdUsuario = usuarioMapeado.IdUsuario;
 
-            return Mensajes_Globales.Desactivado;
+            return Respuesta.Success(usuarios, Mensajes_Globales.Editado, Codigos_Globales.Success);
         }
     }
 }
