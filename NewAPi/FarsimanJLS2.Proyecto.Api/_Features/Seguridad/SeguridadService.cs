@@ -10,7 +10,7 @@ using System.Data;
 
 namespace FarsimanJLS2.Proyecto.Api._Features.Seguridad
 {
-    public class SeguridadService : IUsuariosService<UsuarioDto, UsuariosViewDto>
+    public class SeguridadService : ISeguridadService<UsuarioDto, UsuariosViewDto>
     {
         private readonly IMapper _mapper;
         private readonly UnitOfWork _unitOfWork;
@@ -46,14 +46,8 @@ namespace FarsimanJLS2.Proyecto.Api._Features.Seguridad
             usuarioMapeado.UsuarioModificiacionId = null;
             usuarioMapeado.FechaModificacion = null;
 
-            if (!_seguridadDomain.VaciosValidadUsuarios(usuariosDto))
-                return Respuesta.Success(usuariosDto, Mensajes_Globales.Vacio, Codigos_Globales.BadRequest);
-
-            if (_seguridadDomain.ValidarRolExiste(usuariosDto.IdPerfil, _unitOfWork.Repository<Perfile>().AsQueryable().ToList()))
-                return Respuesta.Success(usuariosDto, Mensajes_Globales.RegistroInexistente, Codigos_Globales.BadRequest);
-
-            if (_seguridadDomain.ValidarUsuarioExiste(usuariosDto, _unitOfWork.Repository<Usuario>().AsQueryable().ToList()))
-                return Respuesta.Success(usuariosDto, Mensajes_Globales.RegistroRepetido, Codigos_Globales.BadRequest);
+            if (_seguridadDomain.ValidacionesUsuarios(usuariosDto, usuariosDto.IdPerfil, _unitOfWork.Repository<Perfile>().AsQueryable().ToList(), _unitOfWork.Repository<Usuario>().AsQueryable().ToList(), 0))
+                return Respuesta.Success(usuariosDto, Mensajes_Globales.IdVacio, Codigos_Globales.BadRequest);
 
             /*
             UsuariosValidator validator = new UsuariosValidator();
@@ -76,17 +70,8 @@ namespace FarsimanJLS2.Proyecto.Api._Features.Seguridad
 
         public Respuesta<UsuarioDto> ActualizarUsuarios(UsuarioDto usuariosDto)
         {
-            if (usuariosDto.IdUsuario <= 0)
+            if(_seguridadDomain.ValidacionesUsuarios(usuariosDto, usuariosDto.IdPerfil, _unitOfWork.Repository<Perfile>().AsQueryable().ToList(), _unitOfWork.Repository<Usuario>().AsQueryable().ToList(),1))
                 return Respuesta.Success(usuariosDto, Mensajes_Globales.IdVacio, Codigos_Globales.BadRequest);
-
-            if (!_seguridadDomain.VaciosValidadUsuarios(usuariosDto))
-                return Respuesta.Success(usuariosDto, Mensajes_Globales.Vacio, Codigos_Globales.BadRequest);
-
-            if (_seguridadDomain.ValidarRolExiste(usuariosDto.IdPerfil, _unitOfWork.Repository<Perfile>().AsQueryable().ToList()))
-                return Respuesta.Success(usuariosDto, Mensajes_Globales.RegistroInexistente, Codigos_Globales.BadRequest);
-
-            if (_seguridadDomain.ValidarUsuarioExiste(usuariosDto, _unitOfWork.Repository<Usuario>().AsQueryable().ToList()))
-                return Respuesta.Success(usuariosDto, Mensajes_Globales.RegistroRepetido, Codigos_Globales.BadRequest);
 
             Usuario? usuarioMapeado = _unitOfWork.Repository<Usuario>().FirstOrDefault(x => x.IdUsuario == usuariosDto.IdUsuario);
             //UsuariosValidator validator = new UsuariosValidator();
@@ -95,7 +80,6 @@ namespace FarsimanJLS2.Proyecto.Api._Features.Seguridad
                 return Respuesta.Success(usuariosDto, Mensajes_Globales.RegistroInexistente, Codigos_Globales.BadRequest);
             else
             {
-
                 //ValidationResult validationResult = validator.Validate(usuarioMapeado);
                /* if (!validationResult.IsValid)
                 {

@@ -2,7 +2,7 @@
 
 namespace FarsimanJLS2.Proyecto.Api._Features.Seguridad
 {
-    public interface IUsuariosService<T, V>
+    public interface ISeguridadService<T, V>
     {
         public Respuesta<List<V>> ListarUsuarios();
         public Respuesta<T> InsertarUsuarios(UsuarioDto usuariosDto);
