@@ -8,10 +8,11 @@ using FarsimanJLS2.Proyecto.Api._Features.Seguridad.SeguridadDto;
 using System;
 using FarsimanJLS2.Proyecto.Api._Features.Generales.GeneralesDto;
 using FarsimanJLS2.Proyecto.Api._Features.Sucursales.SucursalesDto;
+using FarsimanJLS2.Proyecto.Api._Features.Productos;
 
 namespace FarsimanJLS2.Proyecto.Api._Features.Seguridad
 {
-    public class ProductosService
+    public class ProductosService : IProductoService<ProductoDto>
     {
         private readonly IMapper _mapper;
         private readonly UnitOfWork _unitOfWork;
@@ -33,10 +34,10 @@ namespace FarsimanJLS2.Proyecto.Api._Features.Seguridad
                             }).ToList();
             return Respuesta.Success<List<ProductoDto>>(Productos, Mensajes_Globales.Listado, Codigos_Globales.Success);
         }
-        public Respuesta<ProductoDto> InsertarProductos(ProductoDto Productos)
+        public Respuesta<ProductoDto> InsertarProductos(ProductoDto dto)
         {
 
-            var ProductoMapeado = _mapper.Map<Producto>(Productos);
+            var ProductoMapeado = _mapper.Map<Producto>(dto);
             ProductoMapeado.UsuarioModificiacionId = null;
             ProductoMapeado.FechaModificacion = null;
             /*
@@ -54,22 +55,22 @@ namespace FarsimanJLS2.Proyecto.Api._Features.Seguridad
             _unitOfWork.SaveChanges();
 
 
-            Productos.IdProducto = ProductoMapeado.IdProducto;
+            dto.IdProducto = ProductoMapeado.IdProducto;
 
-            return Respuesta.Success(Productos, Mensajes_Globales.Agregado, Codigos_Globales.Success);
+            return Respuesta.Success(dto, Mensajes_Globales.Agregado, Codigos_Globales.Success);
 
         }
 
-        public Respuesta<ProductoDto> ActualizarProducto(ProductoDto Productos)
+        public Respuesta<ProductoDto> ActualizarProductos(ProductoDto dto)
         {
-            if (Productos.IdProducto <= 0)
-                return Mensajes_Globales.IdVacio;
+            //if (dto.IdProducto <= 0)
+            //    return Mensajes_Globales.IdVacio;
 
-            Producto? ProductoMapeado = _unitOfWork.Repository<Producto>().FirstOrDefault(x => x.IdProducto == Productos.IdProducto);
+            Producto? ProductoMapeado = _unitOfWork.Repository<Producto>().FirstOrDefault(x => x.IdProducto == dto.IdProducto);
             //TransportistaValidator validator = new TransportistaValidator();
 
             if (ProductoMapeado == null)
-                return Respuesta.Success(Productos, Mensajes_Globales.RegistroInexistente, Codigos_Globales.BadRequest);
+                return Respuesta.Success(dto, Mensajes_Globales.RegistroInexistente, Codigos_Globales.BadRequest);
             else
             {
                 /*
@@ -81,36 +82,36 @@ namespace FarsimanJLS2.Proyecto.Api._Features.Seguridad
                     return menssageValidation;
                 }
                 */
-                ProductoMapeado.IdProducto = Productos.IdProducto;
-                ProductoMapeado.Nombre = Productos.Nombre;
-                ProductoMapeado.Activo = Productos.Activo;
-                ProductoMapeado.UsuarioModificiacionId = Productos.UsuarioModificiacionId;
-                ProductoMapeado.FechaModificacion = Productos.FechaModificacion;
+                ProductoMapeado.IdProducto = dto.IdProducto;
+                ProductoMapeado.Nombre = dto.Nombre;
+                ProductoMapeado.Activo = dto.Activo;
+                ProductoMapeado.UsuarioModificiacionId = dto.UsuarioModificiacionId;
+                ProductoMapeado.FechaModificacion = dto.FechaModificacion;
 
                 _unitOfWork.SaveChanges();
             }
 
-            return Respuesta.Success(Productos, Mensajes_Globales.Agregado, Codigos_Globales.Success);
+            return Respuesta.Success(dto, Mensajes_Globales.Agregado, Codigos_Globales.Success);
         }
-        public Respuesta<ProductoDto> DesactivarProducto(ProductoDto Productos)
+        public Respuesta<ProductoDto> DesactivarProductos(ProductoDto dto)
         {
-            if (Productos.IdProducto <= 0)
-                return Mensajes_Globales.IdVacio;
+            //if (dto.IdProducto <= 0)
+            //    return Mensajes_Globales.IdVacio;
 
-            Producto? ProductoMapeado = _unitOfWork.Repository<Producto>().FirstOrDefault(x => x.IdProducto == Productos.IdProducto);
+            Producto? ProductoMapeado = _unitOfWork.Repository<Producto>().FirstOrDefault(x => x.IdProducto == dto.IdProducto);
 
 
             if (ProductoMapeado == null)
-                return Respuesta.Success(Productos, Mensajes_Globales.RegistroInexistente, Codigos_Globales.BadRequest);
+                return Respuesta.Success(dto, Mensajes_Globales.RegistroInexistente, Codigos_Globales.BadRequest);
             else
             {
                 ProductoMapeado.Activo = false;
-                ProductoMapeado.UsuarioModificiacionId = Productos.UsuarioModificiacionId;
-                ProductoMapeado.FechaModificacion = Productos.FechaModificacion;
+                ProductoMapeado.UsuarioModificiacionId = dto.UsuarioModificiacionId;
+                ProductoMapeado.FechaModificacion = dto.FechaModificacion;
 
                 _unitOfWork.SaveChanges();
             }
-            return Respuesta.Success(Productos, Mensajes_Globales.Agregado, Codigos_Globales.Success);
+            return Respuesta.Success(dto, Mensajes_Globales.Agregado, Codigos_Globales.Success);
         }
     }
 }

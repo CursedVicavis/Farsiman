@@ -8,12 +8,9 @@
         public DateTime? FechaSalida { get; set; }
         public int Total { get; set; }
         public DateTime? FechaRecivido { get; set; }
+        public int cantidadProducto { get; set; }
         public int IdUsuarioRecibe { get; set; }
-        public int IdEstado { get; set; }
         public int UsuarioCreacionId { get; set; }
-        public DateTime FechaCreacion { get; set; }
-        public int? UsuarioModificiacionId { get; set; }
-        public DateTime? FechaModificacion { get; set; }
-        public bool? Activo { get; set; }
+        public List<SalidasInventarioDetallesDto>? Detalles { get; set; }
     }
 }

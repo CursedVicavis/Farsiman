@@ -1,4 +1,5 @@
-﻿using FarsimanJLS2.Proyecto.Api._Features.Seguridad.SeguridadDto;
+﻿using Farsiman.Application.Core.Standard.DTOs;
+using FarsimanJLS2.Proyecto.Api._Features.Seguridad.SeguridadDto;
 
 namespace FarsimanJLS2.Proyecto.Api._Features.Seguridad
 {

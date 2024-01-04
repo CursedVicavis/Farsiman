@@ -18,6 +18,7 @@ namespace FarsimanJLS2.Proyecto.Api
         public DateTime? FechaRecivido { get; set; }
         public int IdUsuarioRecibe { get; set; }
         public int IdEstado { get; set; }
+        public int cantidadProducto { get; set; }
         public int UsuarioCreacionId { get; set; }
         public DateTime FechaCreacion { get; set; }
         public int? UsuarioModificiacionId { get; set; }

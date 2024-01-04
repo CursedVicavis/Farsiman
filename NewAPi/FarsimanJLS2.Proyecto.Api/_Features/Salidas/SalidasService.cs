@@ -5,10 +5,12 @@ using AutoMapper;
 using Farsiman.Application.Core.Standard.DTOs;
 using Farsiman.Infraestructure.Core.Entity.Standard;
 using FarsimanJLS2.Proyecto.Api._Features.Seguridad.SeguridadDto;
+using FarsimanJLS2.Proyecto.Api._Features.Salidas;
+using FarsimanJLS2.Proyecto.Api._Features.Salidas.Dto;
 
 namespace FarsimanJLS2.Proyecto.Api._Features.Seguridad
 {
-    public class SalidasService
+    public class SalidasService : ISalidasService<SalidasInventarioDto, SalidasInventarioViewDto>
     {
         private readonly IMapper _mapper;
         private readonly UnitOfWork _unitOfWork;
@@ -18,110 +20,92 @@ namespace FarsimanJLS2.Proyecto.Api._Features.Seguridad
             _mapper = mapper;
             _unitOfWork = unitOfWork.builderTransporte();
         }
+        public Respuesta<List<SalidasInventarioViewDto>> ListarSalida()
+        { 
+        var respuesta = (from salida in _unitOfWork.Repository<SalidasInventario>().AsQueryable()
+                         join sucursal in _unitOfWork.Repository<Sucursale>().AsQueryable()
+                         on salida.IdSucursal equals sucursal.IdSucursal
 
-        public Respuesta<List<UsuarioDto>> ListarTransportista()
-        {
-            var usuarios = (from usuario in _unitOfWork.Repository<Usuario>().AsQueryable()
-                            select new UsuarioDto
-                            {
-                                IdUsuario = usuario.IdUsuario,
-                                Nombre = usuario.Nombre,
-                                EsAdmin = usuario.EsAdmin,
-                                IdPerfil = usuario.IdPerfil,
-                                Activo = usuario.Activo
-                            }).ToList();
-            return Respuesta.Success<List<UsuarioDto>>(usuarios, Mensajes_Globales.Listado, Codigos_Globales.Success);
-        }
-        public Respuesta<UsuarioDto> InsertarUsuarios(UsuarioDto usuarios)
-        {
+                         join usuarioEnvia in _unitOfWork.Repository<Usuario>().AsQueryable()
+                         on salida.IdUsuario equals usuarioEnvia.IdUsuario
 
-            var usuarioMapeado = _mapper.Map<Usuario>(usuarios);
-            usuarioMapeado.UsuarioModificiacionId = null;
-            usuarioMapeado.FechaModificacion = null;
-            /*
-            UsuariosValidator validator = new UsuariosValidator();
+                         join usuarioRecibe in _unitOfWork.Repository<Usuario>().AsQueryable()
+                         on salida.IdUsuarioRecibe equals usuarioRecibe.IdUsuario
 
-            ValidationResult validationResult = validator.Validate(usuarioMapeado);
-            if (!validationResult.IsValid)
-            {
-                IEnumerable<string> errores = validationResult.Errors.Select(s => s.ErrorMessage);
-                string menssageValidation = string.Join(Environment.NewLine, errores);
-                return Respuesta.Fault<UsuarioDto>(menssageValidation, Codigos_Globales.BadRequest);
-            }
-            */
-            _unitOfWork.Repository<Usuario>().Add(usuarioMapeado);
-            _unitOfWork.SaveChanges();
+                         join estado in _unitOfWork.Repository<Api.Estado>().AsQueryable()
+                         on salida.IdEstado equals estado.IdEstado
 
-
-            usuarios.IdUsuario = usuarioMapeado.IdUsuario;
-
-            return Respuesta.Success(usuarios, Mensajes_Globales.Agregado, Codigos_Globales.Success);
-
-        }
-
-        public Respuesta<UsuarioDto> ActualizarUsuario(UsuarioDto usuarios)
-        {
-            if (usuarios.IdUsuario <= 0)
-                return Respuesta.Success(usuarios, Mensajes_Globales.IdVacio, Codigos_Globales.BadRequest);
-
-            Usuario? usuarioMapeado = _unitOfWork.Repository<Usuario>().FirstOrDefault(x => x.IdUsuario == usuarios.IdUsuario);
-            //UsuariosValidator validator = new UsuariosValidator();
-
-            if (usuarioMapeado == null)
-            {
-                return Respuesta.Success(usuarios, Mensajes_Globales.RegistroInexistente, Codigos_Globales.BadRequest);
-            }
-            else
-            {
-
-                //ValidationResult validationResult = validator.Validate(usuarioMapeado);
-               /* if (!validationResult.IsValid)
-                {
-                    IEnumerable<string> errores = validationResult.Errors.Select(s => s.ErrorMessage);
-                    string menssageValidation = string.Join(Environment.NewLine, errores);
-                    return Respuesta.Success(usuarios, menssageValidation, Codigos_Globales.BadRequest);
-                }*/
-
-                usuarioMapeado.IdUsuario = usuarios.IdUsuario;
-                usuarioMapeado.Nombre = usuarios.Nombre;
-                usuarioMapeado.Contrasena = usuarios.Contrasena;
-                usuarioMapeado.EsAdmin = usuarios.EsAdmin;
-                usuarioMapeado.IdPerfil = usuarios.IdPerfil;
-                usuarioMapeado.UsuarioCreacionId = usuarios.UsuarioCreacionId;
-                usuarioMapeado.FechaCreacion = usuarios.FechaCreacion;
-                usuarioMapeado.UsuarioModificiacionId = usuarios.UsuarioModificiacionId;
-                usuarioMapeado.FechaModificacion = usuarios.FechaModificacion;
-
-                _unitOfWork.SaveChanges();
-            }
-            usuarios.IdUsuario = usuarioMapeado.IdUsuario;
-
-            return Respuesta.Success(usuarios, Mensajes_Globales.Editado, Codigos_Globales.Success);
+                         select new SalidasInventarioViewDto
+                         {
+                            IdSalidaInventario = salida.IdSalidaInventario,
+                            IdSucursal = salida.IdSucursal,
+                            NombreSucursal = sucursal.Nombre,
+                            IdUsuario = usuarioEnvia.IdUsuario,
+                            NombreUsuario = usuarioEnvia.Nombre,
+                            FechaSalida = salida.FechaSalida,
+                            Total = salida.Total,
+                            FechaRecivido = salida.FechaRecivido,
+                            IdUsuarioRecibe = salida.IdUsuarioRecibe,
+                            NombreUsuarioRecibe = usuarioRecibe.Nombre,
+                            IdEstado = salida.IdEstado, 
+                            NombreEstado = estado.Nombre,
+                            Detalles = (from detalles in _unitOfWork.Repository<SalidasInventarioDetalle>().AsQueryable()
+                                        join lote in _unitOfWork.Repository<ProductosLote>().AsQueryable()
+                                        on detalles.IdLote equals lote.IdLote
+                                        
+                                        join producto in _unitOfWork.Repository<Producto>().AsQueryable()
+                                        on lote.IdProducto equals producto.IdProducto
+                                        select new SalidasInventarioDetallesViewDto 
+                                        {
+                                            IdDetalle = detalles.IdDetalle,
+                                            IdSalidaInventario = salida.IdSalidaInventario,
+                                            IdLote = lote.IdLote,
+                                            FechaVencimiento = lote.FechaVencimiento,
+                                            IdProducto = producto.IdProducto,
+                                            NombreProducto = producto.Nombre,
+                                            CantidadProducto = detalles.CantidadProducto
+                                        }).ToList()
+                         }).ToList();
+            return Respuesta.Success<List<SalidasInventarioViewDto>>(respuesta, Mensajes_Globales.Listado, Codigos_Globales.Success);
+       
         }
 
-        public string DesactivarUsuario(UsuarioDto usuarios)
+    public Respuesta<SalidasInventarioDto> InsertarSalida(SalidasInventarioDto dto)
         {
-            if (usuarios.IdUsuario <= 0)
-                return Mensajes_Globales.IdVacio;
-
-            Usuario? usuarioMapeado = _unitOfWork.Repository<Usuario>().FirstOrDefault(x => x.IdUsuario == usuarios.IdUsuario);
-
-
-            if (usuarioMapeado == null)
+            try
             {
-                return Mensajes_Globales.RegistroInexistente;
+                
             }
-            else
+            catch (Exception ex) 
             {
-                usuarioMapeado.Activo = false;
-                usuarioMapeado.UsuarioModificiacionId = usuarios.UsuarioModificiacionId;
-                usuarioMapeado.FechaModificacion = usuarios.FechaModificacion;
 
-                _unitOfWork.SaveChanges();
+                throw;
             }
-            usuarios.IdUsuario = usuarioMapeado.IdUsuario;
+        }
 
-            return Mensajes_Globales.Desactivado;
+        public Respuesta<SalidasInventarioDto> DesactivarSalida(SalidasInventarioDto dto)
+        {
+            //    if (dto.IdUsuario <= 0)
+            //        return Mensajes_Globales.IdVacio;
+
+            //    Usuario? usuarioMapeado = _unitOfWork.Repository<Usuario>().FirstOrDefault(x => x.IdUsuario == dto.IdUsuario);
+
+
+            //    if (usuarioMapeado == null)
+            //    {
+            //        return Mensajes_Globales.RegistroInexistente;
+            //    }
+            //    else
+            //    {
+            //        usuarioMapeado.Activo = false;
+
+            //        _unitOfWork.SaveChanges();
+            //    }
+            //    dto.IdUsuario = usuarioMapeado.IdUsuario;
+
+            //    return Mensajes_Globales.Desactivado;
+
+            throw new NotImplementedException();
         }
     }
 }
