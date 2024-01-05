@@ -28,7 +28,7 @@ namespace FarsimanJLS2.Proyecto.Api._Features.Seguridad
             var Productos = (from Producto in _unitOfWork.Repository<Producto>().AsQueryable()
                             select new ProductoDto
                             {
-                                IdProducto = Producto.IdProducto,
+                                IdProductos = Producto.IdProductos,
                                 Nombre = Producto.Nombre,
                                 Activo = Producto.Activo
                             }).ToList();
@@ -55,7 +55,7 @@ namespace FarsimanJLS2.Proyecto.Api._Features.Seguridad
             _unitOfWork.SaveChanges();
 
 
-            dto.IdProducto = ProductoMapeado.IdProducto;
+            dto.IdProductos = ProductoMapeado.IdProductos;
 
             return Respuesta.Success(dto, Mensajes_Globales.Agregado, Codigos_Globales.Success);
 
@@ -66,7 +66,7 @@ namespace FarsimanJLS2.Proyecto.Api._Features.Seguridad
             //if (dto.IdProducto <= 0)
             //    return Mensajes_Globales.IdVacio;
 
-            Producto? ProductoMapeado = _unitOfWork.Repository<Producto>().FirstOrDefault(x => x.IdProducto == dto.IdProducto);
+            Producto? ProductoMapeado = _unitOfWork.Repository<Producto>().FirstOrDefault(x => x.IdProductos == dto.IdProductos);
             //TransportistaValidator validator = new TransportistaValidator();
 
             if (ProductoMapeado == null)
@@ -82,7 +82,7 @@ namespace FarsimanJLS2.Proyecto.Api._Features.Seguridad
                     return menssageValidation;
                 }
                 */
-                ProductoMapeado.IdProducto = dto.IdProducto;
+                ProductoMapeado.IdProductos = dto.IdProductos;
                 ProductoMapeado.Nombre = dto.Nombre;
                 ProductoMapeado.Activo = dto.Activo;
                 ProductoMapeado.UsuarioModificiacionId = dto.UsuarioModificiacionId;
@@ -98,7 +98,7 @@ namespace FarsimanJLS2.Proyecto.Api._Features.Seguridad
             //if (dto.IdProducto <= 0)
             //    return Mensajes_Globales.IdVacio;
 
-            Producto? ProductoMapeado = _unitOfWork.Repository<Producto>().FirstOrDefault(x => x.IdProducto == dto.IdProducto);
+            Producto? ProductoMapeado = _unitOfWork.Repository<Producto>().FirstOrDefault(x => x.IdProductos == dto.IdProductos);
 
 
             if (ProductoMapeado == null)

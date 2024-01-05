@@ -1,7 +1,14 @@
 using AcademiaFS.Proyecto.Api.Infrastructure;
 using Farsiman.Extensions.Configuration;
 using FarsimanJLS2.Proyecto.Api;
+using FarsimanJLS2.Proyecto.Api._Features.Empleado;
+using FarsimanJLS2.Proyecto.Api._Features.Estado;
+using FarsimanJLS2.Proyecto.Api._Features.Estados;
+using FarsimanJLS2.Proyecto.Api._Features.Productos;
+using FarsimanJLS2.Proyecto.Api._Features.ProductosLotes;
+using FarsimanJLS2.Proyecto.Api._Features.Salidas;
 using FarsimanJLS2.Proyecto.Api._Features.Seguridad;
+using FarsimanJLS2.Proyecto.Api._Features.Sucursales;
 using FarsimanJLS2.Proyecto.Api.Infrastructure.BodegBD;
 using Microsoft.EntityFrameworkCore;
 
@@ -51,9 +58,27 @@ builder.Services.AddDbContext<BOCE_DBContext>(options =>
 });
 builder.Services.AddTransient<UnitOfWorkBuilder, UnitOfWorkBuilder>();
 builder.Services.AddAutoMapper(typeof(MapProfile));
+
+builder.Services.AddTransient<EmpleadoDomain>();
+builder.Services.AddTransient<EmpleadoService>();
+
+builder.Services.AddTransient<EstadoDomain>();
+builder.Services.AddTransient<EstadoService>();
+
 builder.Services.AddTransient<ProductosService>();
+builder.Services.AddTransient<ProductosDomain>();
+
+builder.Services.AddTransient<ProductosLote>();
+builder.Services.AddTransient<ProductosDomain>();
+
+builder.Services.AddTransient<SalidasService>();
+builder.Services.AddTransient<SalidasDomain>();
+
 builder.Services.AddTransient<SeguridadService>();
 builder.Services.AddTransient<SeguridadDomain>();
+
+builder.Services.AddTransient<SucursalesDomain>();
+builder.Services.AddTransient<SucursalesService>();
 
 var app = builder.Build();
 

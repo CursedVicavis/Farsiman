@@ -7,7 +7,7 @@ namespace FarsimanJLS2.Proyecto.Api.Infrastructure.BodegBD.Maps.Generales
     {
         public void Configure(EntityTypeBuilder<Producto> builder)
         {
-            builder.HasKey(e => e.IdProducto)
+            builder.HasKey(e => e.IdProductos)
                         .HasName("PK_dbo_Productos_IdProducto");
 
             builder.Property(e => e.Activo)

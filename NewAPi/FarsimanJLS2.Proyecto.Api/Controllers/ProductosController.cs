@@ -17,25 +17,25 @@ namespace FarsimanJLS2.Proyecto.Api.Controllers
         [HttpGet("Listar")]
         public IActionResult listarUsuarios()
         {
-            var resultado = _productosService.ListarUsuarios();
+            var resultado = _productosService.ListarProductos();
             return Ok(resultado);
         }
         [HttpPost("Insertar")]
-        public IActionResult InsertarUsuarios(ProductoDto Usuario)
+        public IActionResult InsertarUsuarios(ProductoDto dto)
         {
-            var resultado = _productosService.InsertarUsuarios(Usuario);
+            var resultado = _productosService.InsertarProductos(dto);
             return Ok(resultado);
         }
         [HttpPut("Actualizar")]
-        public IActionResult ActualizarUsuarios(ProductoDto Usuario)
+        public IActionResult ActualizarUsuarios(ProductoDto dto)
         {
-            var resultado = _productosService.ActualizarUsuario(Usuario);
+            var resultado = _productosService.ActualizarProductos(dto);
             return Ok(resultado);
         }
         [HttpPut("Desactivar")]
-        public IActionResult DesactivarUsuarios(ProductoDto Usuario)
+        public IActionResult DesactivarUsuarios(ProductoDto dto)
         {
-            var resultado = _productosService.DesactivarUsuario(Usuario);
+            var resultado = _productosService.DesactivarProductos(dto);
             return Ok(resultado);
         }
     }

@@ -21,13 +21,24 @@ namespace FarsimanJLS2.Proyecto.Api._Features.Salidas
         }
         public bool ValidarInventarioSuficiente(List<Api.ProductosLote> listadoLotes, List<SalidasInventarioDetallesDto> dto)
         {
-            foreach (var item in dto)
-            {
-                var res = (from lotes in listadoLotes
-                           where lotes.IdProducto == item.IdProducto
-                           orderby lotes.FechaVencimiento
-                           select )
-            }
+            var a = (from lote in listadoLotes
+                    orderby lote.FechaVencimiento
+                     select lote).Single();
+
+            //foreach (var item in dto)
+            //{
+            //    if (item.CantidadProducto >= listadoLotes.FirstOrDefault().Inventario)
+            //    { 
+                
+            //    }
+            //    var res = (from lotes in listadoLotes
+            //                where lotes.IdProducto == item.IdProducto
+            //                orderby lotes.FechaVencimiento
+            //                select new ProductosLote
+            //                {
+            //                    Inventario = lotes.Inventario - item.CantidadProducto
+            //                }).ToList();
+            //}
             return true;
         }
     }

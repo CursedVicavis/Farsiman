@@ -14,11 +14,11 @@ namespace FarsimanJLS2.Proyecto.Api.Infrastructure.BodegBD
         public MapProfile()
         {
             CreateMap<ProductosLoteDto, ProductosLote>().ReverseMap();
-            CreateMap<EmpleadoDto, Empleado>().ReverseMap();
-            CreateMap<EstadoDto, Estado>().ReverseMap();
+            CreateMap<EmpleadosDto, Empleado>().ReverseMap();
+            CreateMap<EstadosDto, Estado>().ReverseMap();
             CreateMap<ProductoDto, Producto>().ReverseMap();
             CreateMap<ProductosLoteDto, ProductosLote>().ReverseMap();
-            CreateMap<SalidasInventarioDetalles, SalidasInventarioDetalle>().ReverseMap();
+            CreateMap<SalidasInventarioDetallesDto, SalidasInventarioDetalle>().ReverseMap();
             CreateMap<SalidasInventarioDto, SalidasInventario>().ReverseMap();
             CreateMap<PerfileDto, Perfile>().ReverseMap();
             CreateMap<PerfilePorPermisoDto, PerfilesPorPermiso>().ReverseMap();

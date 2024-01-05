@@ -105,8 +105,8 @@ namespace FarsimanJLS2.Proyecto.Api._Features.Seguridad
 
         public Respuesta<UsuarioDto> DesactivarUsuarios(UsuarioDto usuariosDto)
         {
-            if (usuariosDto.IdUsuario <= 0)
-                return Mensajes_Globales.IdVacio;
+            //if (usuariosDto.IdUsuario <= 0)
+            //    return Mensajes_Globales.IdVacio;
 
             Usuario? usuarioMapeado = _unitOfWork.Repository<Usuario>().FirstOrDefault(x => x.IdUsuario == usuariosDto.IdUsuario);
 
