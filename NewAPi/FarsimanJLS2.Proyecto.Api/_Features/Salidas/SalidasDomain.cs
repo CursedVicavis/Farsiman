@@ -1,12 +1,17 @@
-﻿using Farsiman.Application.Core.Standard.DTOs;
+﻿using AcademiaFS.Proyecto.Api._Common;
+using AcademiaFS.Proyecto.Api._Common.NewFolder;
+using Farsiman.Application.Core.Standard.DTOs;
 using FarsimanJLS2.Proyecto.Api._Features.Salidas.Dto;
 
 namespace FarsimanJLS2.Proyecto.Api._Features.Salidas
 {
     public class SalidasDomain
     {
-        public Respuesta<bool> ValidacionesHeader()
+        public Respuesta<bool> ValidacionesHeader(SalidasInventarioDto dto,List<Api.ProductosLote> listadoLotes)
         {
+            if (!ValidarVaciosHeader(dto))
+                return Respuesta.Fault(Mensajes_Globales.Vacio, Codigos_Globales.BadRequest, false);
+            
             return Respuesta.Success(true);
         }
         public Respuesta<bool> ValidacionesDetalles()
@@ -19,27 +24,11 @@ namespace FarsimanJLS2.Proyecto.Api._Features.Salidas
                 return false;
             return true;
         }
-        public bool ValidarInventarioSuficiente(List<Api.ProductosLote> listadoLotes, List<SalidasInventarioDetallesDto> dto)
+        public int SacarTotal(SalidasInventarioDto dto, List<Api.ProductosLote> listadoLotes)
         {
-            var a = (from lote in listadoLotes
-                    orderby lote.FechaVencimiento
-                     select lote).Single();
-
-            //foreach (var item in dto)
-            //{
-            //    if (item.CantidadProducto >= listadoLotes.FirstOrDefault().Inventario)
-            //    { 
-                
-            //    }
-            //    var res = (from lotes in listadoLotes
-            //                where lotes.IdProducto == item.IdProducto
-            //                orderby lotes.FechaVencimiento
-            //                select new ProductosLote
-            //                {
-            //                    Inventario = lotes.Inventario - item.CantidadProducto
-            //                }).ToList();
-            //}
-            return true;
+            var respuesta = listadoLotes.Where(x => x.IdProducto == dto.IdProducto).FirstOrDefault();
+            dto.Total = respuesta.Costo * dto.cantidadProducto;
+            return dto.Total;
         }
     }
 }

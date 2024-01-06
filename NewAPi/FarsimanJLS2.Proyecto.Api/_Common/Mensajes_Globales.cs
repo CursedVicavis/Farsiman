@@ -3,6 +3,7 @@
     public class Mensajes_Globales
     {
         public static string Listado = "Listado correctamente";
+        public static string Estado = "El estado cambio con exito";
         public static string Agregado = "Agregado correctamente";
         public static string Editado = "Editado correctamente";
         public static string Desactivado = "Desactivado correctamente";
@@ -12,5 +13,6 @@
         public static string IdVacio = "Ingrese el id";
         public static string RegistroInexistente = "Este Registro no existe";
         public static string RegistroRepetido = "Este Registro ya existe";
+        public static string Login = "Inicio de sesion exitoso";
     }
 }

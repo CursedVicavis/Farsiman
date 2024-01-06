@@ -2,11 +2,9 @@
 
 namespace FarsimanJLS2.Proyecto.Api._Features.ProductosLotes
 {
-    public interface IProdcutosLoteService<T>   
+    public interface IProdcutosLoteService<T,V>   
     {
-        public Respuesta<List<T>> ListarLotesService();
-        public Respuesta<T> InsertarLotesService(T dto);
-        public Respuesta<T> ActualizarLotesService(T dto);
-        public Respuesta<T> DesactivarLotesService(T dto);
+        public Respuesta<List<V>> ListarLotes();
+        public Respuesta<T> InsertarLotes(T dto);
     }
 }

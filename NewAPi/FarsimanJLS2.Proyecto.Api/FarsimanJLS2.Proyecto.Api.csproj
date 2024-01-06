@@ -8,10 +8,6 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
-    <PackageReference Include="Farsiman.Application.Core.Standard" Version="3.0.1" />
-    <PackageReference Include="Farsiman.AuthServer.Extensions" Version="1.0.35371" />
-    <PackageReference Include="Farsiman.Domain.Core.Validations.Standard" Version="1.0.0" />
-    <PackageReference Include="Farsiman.Extensions.Configuration" Version="2.29723.0" />
     <PackageReference Include="FluentValidation" Version="11.9.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.25" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.25" />
@@ -32,11 +28,23 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Reference Include="Farsiman.Application.Core.Standard">
+      <HintPath>bin\Debug\net6.0\Farsiman.Application.Core.Standard.dll</HintPath>
+    </Reference>
+    <Reference Include="Farsiman.AuthServer.Extensions">
+      <HintPath>bin\Debug\net6.0\Farsiman.AuthServer.Extensions.dll</HintPath>
+    </Reference>
     <Reference Include="Farsiman.Domain.Core.Standard">
-      <HintPath>..\..\..\Farsiman_Academia\AcademiaFS.Proyecto.Api\bin\Debug\net6.0\Farsiman.Domain.Core.Standard.dll</HintPath>
+      <HintPath>bin\Debug\net6.0\Farsiman.Domain.Core.Standard.dll</HintPath>
+    </Reference>
+    <Reference Include="Farsiman.Domain.Core.Validations.Standard">
+      <HintPath>bin\Debug\net6.0\Farsiman.Domain.Core.Validations.Standard.dll</HintPath>
+    </Reference>
+    <Reference Include="Farsiman.Extensions.Configuration">
+      <HintPath>bin\Debug\net6.0\Farsiman.Extensions.Configuration.dll</HintPath>
     </Reference>
     <Reference Include="Farsiman.Infraestructure.Core.Entity.Standard">
-      <HintPath>..\..\..\Farsiman_Academia\AcademiaFS.Proyecto.Api\bin\Debug\net6.0\Farsiman.Infraestructure.Core.Entity.Standard.dll</HintPath>
+      <HintPath>bin\Debug\net6.0\Farsiman.Infraestructure.Core.Entity.Standard.dll</HintPath>
     </Reference>
   </ItemGroup>
 

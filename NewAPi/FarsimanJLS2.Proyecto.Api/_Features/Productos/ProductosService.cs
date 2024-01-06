@@ -36,7 +36,7 @@ namespace FarsimanJLS2.Proyecto.Api._Features.Seguridad
         }
         public Respuesta<ProductoDto> InsertarProductos(ProductoDto dto)
         {
-
+            
             var ProductoMapeado = _mapper.Map<Producto>(dto);
             ProductoMapeado.UsuarioModificiacionId = null;
             ProductoMapeado.FechaModificacion = null;

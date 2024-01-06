@@ -68,8 +68,8 @@ builder.Services.AddTransient<EstadoService>();
 builder.Services.AddTransient<ProductosService>();
 builder.Services.AddTransient<ProductosDomain>();
 
-builder.Services.AddTransient<ProductosLote>();
-builder.Services.AddTransient<ProductosDomain>();
+builder.Services.AddTransient<ProductosLotesService>();
+builder.Services.AddTransient<ProductosLotesDomain>();
 
 builder.Services.AddTransient<SalidasService>();
 builder.Services.AddTransient<SalidasDomain>();

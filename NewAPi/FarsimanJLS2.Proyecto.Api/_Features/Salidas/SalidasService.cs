@@ -24,64 +24,75 @@ namespace FarsimanJLS2.Proyecto.Api._Features.Seguridad
             _unitOfWork = unitOfWork.builderTransporte();
             _salidasDomain = salidas;
         }
-        public Respuesta<List<SalidasInventarioViewDto>> ListarSalida()
-        { 
-        var respuesta = (from salida in _unitOfWork.Repository<SalidasInventario>().AsQueryable()
-                         join sucursal in _unitOfWork.Repository<Sucursale>().AsQueryable()
-                         on salida.IdSucursal equals sucursal.IdSucursal
+        public Respuesta<List<SalidasInventarioViewDto>> ListarSalida(int idSucursal, DateTime fechaInicio, DateTime fechaFinal)
+        {
+            var respuesta = (from salida in _unitOfWork.Repository<SalidasInventario>().AsQueryable()
+                             join sucursal in _unitOfWork.Repository<Sucursale>().AsQueryable()
+                             on salida.IdSucursal equals sucursal.IdSucursal
 
-                         join usuarioEnvia in _unitOfWork.Repository<Usuario>().AsQueryable()
-                         on salida.IdUsuario equals usuarioEnvia.IdUsuario
+                             join usuarioEnvia in _unitOfWork.Repository<Usuario>().AsQueryable()
+                             on salida.IdUsuario equals usuarioEnvia.IdUsuario
 
-                         join usuarioRecibe in _unitOfWork.Repository<Usuario>().AsQueryable()
-                         on salida.IdUsuarioRecibe equals usuarioRecibe.IdUsuario
+                             join usuarioRecibe in _unitOfWork.Repository<Usuario>().AsQueryable()
+                             on salida.IdUsuarioRecibe equals usuarioRecibe.IdUsuario
 
-                         join estado in _unitOfWork.Repository<Api.Estado>().AsQueryable()
-                         on salida.IdEstado equals estado.IdEstado
+                             join estado in _unitOfWork.Repository<Api.Estado>().AsQueryable()
+                             on salida.IdEstado equals estado.IdEstado
+                             where salida.FechaCreacion > fechaInicio && salida.FechaCreacion < fechaFinal
+                             && salida.IdSucursal == idSucursal
 
-                         select new SalidasInventarioViewDto
-                         {
-                            IdSalidaInventario = salida.IdSalidaInventario,
-                            IdSucursal = salida.IdSucursal,
-                            NombreSucursal = sucursal.Nombre,
-                            IdUsuario = usuarioEnvia.IdUsuario,
-                            NombreUsuario = usuarioEnvia.Nombre,
-                            FechaSalida = salida.FechaSalida,
-                            Total = salida.Total,
-                            FechaRecivido = salida.FechaRecivido,
-                            IdUsuarioRecibe = salida.IdUsuarioRecibe,
-                            NombreUsuarioRecibe = usuarioRecibe.Nombre,
-                            IdEstado = salida.IdEstado, 
-                            NombreEstado = estado.Nombre,
-                            Detalles = (from detalles in _unitOfWork.Repository<SalidasInventarioDetalle>().AsQueryable()
-                                        join lote in _unitOfWork.Repository<ProductosLote>().AsQueryable()
-                                        on detalles.IdLote equals lote.IdLote
-                                        
-                                        join producto in _unitOfWork.Repository<Producto>().AsQueryable()
-                                        on lote.IdProducto equals producto.IdProductos
-                                        select new SalidasInventarioDetallesViewDto 
-                                        {
-                                            IdDetalle = detalles.IdDetalle,
-                                            IdSalidaInventario = salida.IdSalidaInventario,
-                                            IdLote = lote.IdLote,
-                                            FechaVencimiento = lote.FechaVencimiento,
-                                            IdProducto = producto.IdProductos,
-                                            NombreProducto = producto.Nombre,
-                                            CantidadProducto = detalles.CantidadProducto
-                                        }).ToList()
-                         }).ToList();
+                             select new SalidasInventarioViewDto
+                             {
+                                 IdSalidaInventario = salida.IdSalidaInventario,
+                                 IdSucursal = salida.IdSucursal,
+                                 NombreSucursal = sucursal.Nombre,
+                                 IdUsuario = usuarioEnvia.IdUsuario,
+                                 NombreUsuario = usuarioEnvia.Nombre,
+                                 FechaSalida = salida.FechaSalida,
+                                 Total = salida.Total,
+                                 FechaRecivido = salida.FechaRecivido,
+                                 cantidadProducto = salida.cantidadProducto,
+                                 IdUsuarioRecibe = salida.IdUsuarioRecibe,
+                                 NombreUsuarioRecibe = usuarioRecibe.Nombre,
+                                 IdEstado = salida.IdEstado,
+                                 NombreEstado = estado.Nombre,
+                                 Detalles = (from detalles in _unitOfWork.Repository<SalidasInventarioDetalle>().AsQueryable()
+                                             join lote in _unitOfWork.Repository<ProductosLote>().AsQueryable()
+                                             on detalles.IdLote equals lote.IdLote
+
+                                             join producto in _unitOfWork.Repository<Producto>().AsQueryable()
+                                             on lote.IdProducto equals producto.IdProductos
+                                             select new SalidasInventarioDetallesViewDto
+                                             {
+                                                 IdDetalle = detalles.IdDetalle,
+                                                 IdSalidaInventario = salida.IdSalidaInventario,
+                                                 IdLote = lote.IdLote,
+                                                 FechaVencimiento = lote.FechaVencimiento,
+                                                 IdProducto = producto.IdProductos,
+                                                 NombreProducto = producto.Nombre,
+                                                 CantidadProducto = detalles.CantidadProducto
+                                             }).ToList()
+                             }).ToList();
             return Respuesta.Success<List<SalidasInventarioViewDto>>(respuesta, Mensajes_Globales.Listado, Codigos_Globales.Success);
-       
+
         }
 
-    public Respuesta<SalidasInventarioDto> InsertarSalida(SalidasInventarioDto dto)
+        public Respuesta<SalidasInventarioDto> InsertarSalida(SalidasInventarioDto dto)
         {
             try
             {
+                var listadLotes = _unitOfWork.Repository<Api.ProductosLote>().AsQueryable().ToList();
+                var validacionesHeader = _salidasDomain.ValidacionesHeader(dto, listadLotes);
+
+                dto.Total = _salidasDomain.SacarTotal(dto, listadLotes);
+
+                if (!validacionesHeader.Ok)
+                    return Respuesta.Fault<SalidasInventarioDto>(validacionesHeader.Mensaje, validacionesHeader.Codigo);
+
                 var salidaMapeado = _mapper.Map<SalidasInventarioDto>(dto);
                 salidaMapeado.IdEstado = 1;
                 var listadoLote = _unitOfWork.Repository<ProductosLote>().AsQueryable().Where(x => x.IdProducto == dto.IdProducto).FirstOrDefault();
-              
+
                 _unitOfWork.BeginTransaction();
                 _unitOfWork.Repository<SalidasInventarioDto>().Add(salidaMapeado);
 
@@ -90,90 +101,89 @@ namespace FarsimanJLS2.Proyecto.Api._Features.Seguridad
 
                 dto.IdSalidaInventario = salidaMapeado.IdSalidaInventario;
 
-                //SalidasValidator validator = new SalidasValidator();
-
-                //ValidationResult validationResult = validator.Validate(registroMapeado);
-                //if (!validationResult.IsValid)
-                //{
-                //    IEnumerable<string> errores = validationResult.Errors.Select(s => s.ErrorMessage);
-                //    string menssageValidation = string.Join(Environment.NewLine, errores);
-                //    return Respuesta.Fault<SalidasInventarioDto>(menssageValidation, Codigos_Globales.BadRequest);
-                //}
-
-                if(!InsertarDetalle(dto))
-                    return Respuesta.Fault<SalidasInventarioDto>(Mensajes_Globales.Error, Codigos_Globales.BadRequest);
+                var e = InsertarDetalle(dto);
+                if (!e.Ok)
+                    return Respuesta.Fault<SalidasInventarioDto>(e.Mensaje, e.Codigo);
 
                 _unitOfWork.Commit();
                 return Respuesta.Success(dto, Mensajes_Globales.Agregado, Codigos_Globales.Success);
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 return Respuesta.Fault<SalidasInventarioDto>(Mensajes_Globales.Error, Codigos_Globales.BadRequest);
             }
-            }
-        public bool InsertarDetalle(SalidasInventarioDto dto)
-        {
-            int aux;
-            var cantidadInicial = dto.cantidadProducto;
-
-            List<SalidasInventarioDetallesDto> salidaDto = new List<SalidasInventarioDetallesDto>();
-            for (int i = 0; i < cantidadInicial; i++)
-            {
-                var cantidadCambiante = cantidadInicial;
-                var inventarioDetalle = (from lotes in _unitOfWork.Repository<Api.ProductosLote>().AsQueryable().ToList()
-                                         where lotes.Activo == true && lotes.IdProducto == dto.IdProducto &&
-                                         lotes.Inventario > 0
-                                         orderby lotes.FechaVencimiento ascending
-                                         select lotes).ToList().FirstOrDefault();
-                aux = inventarioDetalle.Inventario - cantidadInicial;
-                cantidadInicial -= inventarioDetalle.Inventario;
-
-                ProductosLote loteMap = _unitOfWork.Repository<ProductosLote>().FirstOrDefault(x => x.IdLote == inventarioDetalle.IdLote);
-
-                if (aux <= 0)
-                {
-                    loteMap.Inventario = 0;
-                    loteMap.Activo = false;
-                }
-                salidaDto.Add(new SalidasInventarioDetallesDto
-                {
-                    IdSalidaInventario = dto.IdSalidaInventario,
-                    IdLote = loteMap.IdLote,
-                    CantidadProducto = cantidadCambiante,
-                    UsuarioCreacionId = dto.UsuarioCreacionId,
-                    FechaCreacion = DateTime.Now,
-                });
-                var detallesmapeado = _mapper.Map<SalidasInventarioDetalle>(salidaDto);
-                _unitOfWork.Repository<SalidasInventarioDetalle>().Add(detallesmapeado);
-
-            }
-            if (!_unitOfWork.SaveChanges())
-                return false;
-            return true;            
         }
-        public Respuesta<SalidasInventarioDto> DesactivarSalida(SalidasInventarioDto dto)
+        public Respuesta<bool> InsertarDetalle(SalidasInventarioDto dto)
         {
-            //    if (dto.IdUsuario <= 0)
-            //        return Mensajes_Globales.IdVacio;
+            try
+            {
+                int aux;
+                var cantidadInicial = dto.cantidadProducto;
 
-            //    Usuario? usuarioMapeado = _unitOfWork.Repository<Usuario>().FirstOrDefault(x => x.IdUsuario == dto.IdUsuario);
+                List<SalidasInventarioDetallesDto> salidaDto = new List<SalidasInventarioDetallesDto>();
+                SalidasInventarioDetalle detallesmapeado = new SalidasInventarioDetalle();
+                for (int i = 0; i < cantidadInicial; i++)
+                {
+                    var listSalida = _unitOfWork.Repository<SalidasInventario>().AsQueryable().ToList();
+                    var sumaSucursal = listSalida.Where(x => x.IdSucursal == dto.IdSucursal).Sum(x => x.Total);
+                    if (sumaSucursal >= 5000)
+                    {
+                        cantidadInicial = i;
+                    }
+                    else
+                    {
+                        var cantidadCambiante = cantidadInicial;
+                        var inventarioDetalle = (from lotes in _unitOfWork.Repository<Api.ProductosLote>().AsQueryable().ToList()
+                                                 where lotes.Activo == true && lotes.IdProducto == dto.IdProducto &&
+                                                 lotes.Inventario > 0
+                                                 orderby lotes.FechaVencimiento ascending
+                                                 select lotes).ToList().FirstOrDefault();
+                        aux = inventarioDetalle.Inventario - cantidadInicial;
+                        cantidadInicial -= inventarioDetalle.Inventario;
 
+                        ProductosLote loteMap = _unitOfWork.Repository<ProductosLote>().FirstOrDefault(x => x.IdLote == inventarioDetalle.IdLote);
 
-            //    if (usuarioMapeado == null)
-            //    {
-            //        return Mensajes_Globales.RegistroInexistente;
-            //    }
-            //    else
-            //    {
-            //        usuarioMapeado.Activo = false;
+                        if (aux <= 0)
+                        {
+                            loteMap.Inventario = 0;
+                            loteMap.Activo = false;
+                        }
+                        salidaDto.Add(new SalidasInventarioDetallesDto
+                        {
+                            IdSalidaInventario = dto.IdSalidaInventario,
+                            IdLote = loteMap.IdLote,
+                            CantidadProducto = cantidadCambiante,
+                            UsuarioCreacionId = dto.UsuarioCreacionId,
+                            FechaCreacion = DateTime.Now,
+                        });
+                        detallesmapeado = _mapper.Map<SalidasInventarioDetalle>(salidaDto);
+                        _unitOfWork.Repository<SalidasInventarioDetalle>().Add(detallesmapeado);
+                    }
+                }
 
-            //        _unitOfWork.SaveChanges();
-            //    }
-            //    dto.IdUsuario = usuarioMapeado.IdUsuario;
+                if (!_unitOfWork.SaveChanges())
+                    return Respuesta.Success(true);
+                return Respuesta.Fault(Mensajes_Globales.Error, Codigos_Globales.BadRecuest, false);
+            }
+            catch (Exception)
+            {
+                return Respuesta.Fault(Mensajes_Globales.Error, Codigos_Globales.BadRecuest, false);
+            }
+        }
+        public Respuesta<SalidasInventarioDto> CambarEstadoSalida(SalidasInventarioDto dto)
+        {
+            SalidasInventario? salidaMapeada = _unitOfWork.Repository<SalidasInventario>().FirstOrDefault(x => x.IdSalidaInventario == dto.IdSalidaInventario);
 
-            //    return Mensajes_Globales.Desactivado;
-
-            throw new NotImplementedException();
+            if (salidaMapeada == null)
+                return Respuesta.Fault<SalidasInventarioDto>(Mensajes_Globales.RegistroInexistente, Codigos_Globales.BadRequest);
+            else
+            {
+                salidaMapeada.IdEstado = 2;
+                salidaMapeada.FechaRecivido = DateTime.Now;
+                salidaMapeada.IdUsuarioRecibe = dto.IdUsuarioRecibe;
+                _unitOfWork.SaveChanges();
+            }
+            return Respuesta.Success(dto, Mensajes_Globales.Estado, Codigos_Globales.Success);
         }
     }
 }

@@ -124,5 +124,19 @@ namespace FarsimanJLS2.Proyecto.Api._Features.Seguridad
 
             return Respuesta.Success(usuariosDto, Mensajes_Globales.Editado, Codigos_Globales.Success);
         }
+
+        public Respuesta<List<LoginDto>> Login(string usuarionom, string clave)
+        {
+            var usuarioList = (from usuario in _unitOfWork.Repository<Usuario>().AsQueryable()
+                               where usuario.Activo == true && usuario.Nombre == usuarionom
+                               && usuario.Contrasena == clave
+                               select new LoginDto
+                               {
+                                   Nombre = usuario.Nombre,
+                               }).ToList();
+            if (usuarioList.Count == 0)
+                return Respuesta.Success(usuarioList, Mensajes_Globales.Error, Codigos_Globales.Error);
+            return Respuesta.Success(usuarioList, Mensajes_Globales.Login, Codigos_Globales.Success);
+        }
     }
 }

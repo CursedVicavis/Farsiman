@@ -15,10 +15,10 @@ namespace FarsimanJLS2.Proyecto.Api.Controllers
         {
             _salidasService = salidasService;
         }
-        [HttpGet("Listar")]
-        public IActionResult Listar()
+        [HttpGet("Reporte/{IdSucursal}/{fechaInicio}/{fechaFinal}")]
+        public IActionResult Listar(int IdSucursal, DateTime fechaInicio, DateTime fechaFinal)
         {
-            var resultado = _salidasService.ListarSalida();
+            var resultado = _salidasService.ListarSalida(IdSucursal, fechaInicio, fechaFinal);
             return Ok(resultado);
         }
 

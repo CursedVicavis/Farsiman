@@ -15,6 +15,12 @@ namespace FarsimanJLS2.Proyecto.Api.Controllers
         {
             _UsuariosService = UsuariosService;
         }
+        [HttpGet("Login/{usuario}/{contraseña}")]
+        public IActionResult listarUsuarios(string usuario, string contraseña)
+        {
+            Respuesta<List<LoginDto>> resultado = _UsuariosService.Login(usuario, contraseña);
+            return Ok(resultado);
+        }
         [HttpGet("Listar")]
         public IActionResult listarUsuarios()
         { 
