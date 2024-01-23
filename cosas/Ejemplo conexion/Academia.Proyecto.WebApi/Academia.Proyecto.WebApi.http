@@ -1,0 +1,6 @@
+@Academia.Proyecto.WebApi_HostAddress = http://localhost:5160
+
+GET {{Academia.Proyecto.WebApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

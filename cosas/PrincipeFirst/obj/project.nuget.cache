@@ -1,0 +1,19 @@
+{
+  "version": 2,
+  "dgSpecHash": "KWUOg7gWUeLnP9ONTD9ISo4hls5RgU9mD9U4/VenOHstH1zBFFOJrl5ya/O6Njp5Xx68i1xj9Rk4jBnA04oq6Q==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\jelopez\\Desktop\\PrincipeFirst\\PrincipeFirst.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\jelopez\\.nuget\\packages\\castle.core\\5.1.1\\castle.core.5.1.1.nupkg.sha512",
+    "C:\\Users\\jelopez\\.nuget\\packages\\nsubstitute\\5.1.0\\nsubstitute.5.1.0.nupkg.sha512",
+    "C:\\Users\\jelopez\\.nuget\\packages\\system.diagnostics.eventlog\\6.0.0\\system.diagnostics.eventlog.6.0.0.nupkg.sha512"
+  ],
+  "logs": [
+    {
+      "code": "NU1803",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "You are running the 'restore' operation with an 'HTTP' source, 'http://sertfs.grupofarsiman.com/FarsimanPackages/nuget'. Non-HTTPS access will be removed in a future version. Consider migrating to an 'HTTPS' source."
+    }
+  ]
+}

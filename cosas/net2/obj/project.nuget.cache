@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "dgSpecHash": "6kL6KO1tTvImE1C8CrVh+M/ypYQg+8kf1GVkq4ajHGL10QkXSxPtr772MmecUiQbZIH2rxnqa53s3XUfa9PPrA==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\jelopez\\Desktop\\net2\\net2.csproj",
+  "expectedPackageFiles": [],
+  "logs": [
+    {
+      "code": "NU1803",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "You are running the 'restore' operation with an 'HTTP' source, 'http://sertfs.grupofarsiman.com/FarsimanPackages/nuget'. Non-HTTPS access will be removed in a future version. Consider migrating to an 'HTTPS' source."
+    }
+  ]
+}

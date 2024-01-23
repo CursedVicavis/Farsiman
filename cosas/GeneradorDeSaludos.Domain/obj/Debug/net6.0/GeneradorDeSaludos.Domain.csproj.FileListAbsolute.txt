@@ -1,0 +1,12 @@
+C:\Users\jelopez\Desktop\GeneradorDeSaludos.Domain\bin\Debug\net6.0\GeneradorDeSaludos.Domain.deps.json
+C:\Users\jelopez\Desktop\GeneradorDeSaludos.Domain\bin\Debug\net6.0\GeneradorDeSaludos.Domain.dll
+C:\Users\jelopez\Desktop\GeneradorDeSaludos.Domain\bin\Debug\net6.0\GeneradorDeSaludos.Domain.pdb
+C:\Users\jelopez\Desktop\GeneradorDeSaludos.Domain\obj\Debug\net6.0\GeneradorDeSaludos.Domain.csproj.AssemblyReference.cache
+C:\Users\jelopez\Desktop\GeneradorDeSaludos.Domain\obj\Debug\net6.0\GeneradorDeSaludos.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\jelopez\Desktop\GeneradorDeSaludos.Domain\obj\Debug\net6.0\GeneradorDeSaludos.Domain.AssemblyInfoInputs.cache
+C:\Users\jelopez\Desktop\GeneradorDeSaludos.Domain\obj\Debug\net6.0\GeneradorDeSaludos.Domain.AssemblyInfo.cs
+C:\Users\jelopez\Desktop\GeneradorDeSaludos.Domain\obj\Debug\net6.0\GeneradorDeSaludos.Domain.csproj.CoreCompileInputs.cache
+C:\Users\jelopez\Desktop\GeneradorDeSaludos.Domain\obj\Debug\net6.0\GeneradorDeSaludos.Domain.dll
+C:\Users\jelopez\Desktop\GeneradorDeSaludos.Domain\obj\Debug\net6.0\refint\GeneradorDeSaludos.Domain.dll
+C:\Users\jelopez\Desktop\GeneradorDeSaludos.Domain\obj\Debug\net6.0\GeneradorDeSaludos.Domain.pdb
+C:\Users\jelopez\Desktop\GeneradorDeSaludos.Domain\obj\Debug\net6.0\ref\GeneradorDeSaludos.Domain.dll

@@ -1,0 +1,26 @@
+{
+  "version": 2,
+  "dgSpecHash": "IErQya0dY0Aidg9Yf1Yi/MBDEt7cG+Fp/DX6oYu56WUKtTLTLcdm0LkaytKXliu2b+3PfJFR/Qzhax5oVqvdzg==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\jelopez\\Desktop\\Ejemplo conexion\\Academia.Sistema.Desktop\\Academia.Sistema.Desktop.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\jelopez\\.nuget\\packages\\farsiman.application.core.standard\\3.0.1\\farsiman.application.core.standard.3.0.1.nupkg.sha512",
+    "C:\\Users\\jelopez\\.nuget\\packages\\microsoft.aspnet.webapi.client\\6.0.0\\microsoft.aspnet.webapi.client.6.0.0.nupkg.sha512",
+    "C:\\Users\\jelopez\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512",
+    "C:\\Users\\jelopez\\.nuget\\packages\\newtonsoft.json.bson\\1.0.2\\newtonsoft.json.bson.1.0.2.nupkg.sha512",
+    "C:\\Users\\jelopez\\.nuget\\packages\\restsharp\\110.2.0\\restsharp.110.2.0.nupkg.sha512",
+    "C:\\Users\\jelopez\\.nuget\\packages\\system.memory\\4.5.5\\system.memory.4.5.5.nupkg.sha512",
+    "C:\\Users\\jelopez\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512",
+    "C:\\Users\\jelopez\\.nuget\\packages\\system.text.encodings.web\\7.0.0\\system.text.encodings.web.7.0.0.nupkg.sha512",
+    "C:\\Users\\jelopez\\.nuget\\packages\\system.text.json\\7.0.2\\system.text.json.7.0.2.nupkg.sha512",
+    "C:\\Users\\jelopez\\.nuget\\packages\\system.threading.tasks.extensions\\4.5.4\\system.threading.tasks.extensions.4.5.4.nupkg.sha512"
+  ],
+  "logs": [
+    {
+      "code": "NU1803",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "You are running the 'restore' operation with an 'HTTP' source, 'http://sertfs.grupofarsiman.com/FarsimanPackages/nuget'. Non-HTTPS access will be removed in a future version. Consider migrating to an 'HTTPS' source."
+    }
+  ]
+}
